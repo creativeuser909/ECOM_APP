@@ -6,6 +6,11 @@ const UserModel = require("../models/UserModel");
 async function UserSignUpController(request, response) {
     try {
         const { firstname, lastname, email, password } = request.body;
+        const userEmail = await UserModel.findOne({ email: email });
+        if(userEmail){
+            throw new Error("Email Already Exists");
+        }
+        console.log(`request.body: ${JSON.stringify(request.body)}`)
         if(!email){
             throw new Error("Invalid email");
         }
@@ -29,7 +34,7 @@ async function UserSignUpController(request, response) {
             password: hashPassword
         }
         const userData = new UserModel(payload);
-        const saveUser = userData.save();
+        const saveUser = await userData.save();
 
         response.status(201).json({
             data : saveUser,
