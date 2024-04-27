@@ -63,21 +63,23 @@ app.put('/api/products/:id', async (req, res) => {
 
 // Delete a product from Database
 
-app.delete('/api/products/:id', async (req, res) => {
+app.delete('/api/products/:name', async (req, res) => {
     try {
-        const getProduct = await Product.findById(req.params.id);
-        if(!getProduct) {
+        const productName = req.params.name;
+        const deletedProduct = await Product.findOneAndDelete({ name: productName });
+        
+        if (!deletedProduct) {
             return res.status(404).send('Product not found');
         }
-        const productName = getProduct.name;
-        await Product.findByIdAndDelete(req.params.id).then(() => {
-            return res.send(`Product "${productName}" deleted successfully`);
-        });
+
+        return res.send(`Product "${productName}" deleted successfully`);
     } catch (error) {
         console.error('Error deleting product:', error);
         res.status(500).send('Internal Server Error');
     }
-})
+});
+
+
 
 mongoose.connect('mongodb+srv://manishkumar:SYOOAEQ0BA6i5UWV@userdata.nrolojj.mongodb.net/apitest?retryWrites=true&w=majority&appName=apitest')
   .then(() => {
