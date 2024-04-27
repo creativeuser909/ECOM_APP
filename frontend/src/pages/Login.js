@@ -2,10 +2,11 @@ import React, { useState } from "react";
 import loginIcon from "../assets/signin.gif";
 import { FaEye } from "react-icons/fa6";
 import { FaEyeSlash } from "react-icons/fa6";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 
 const Login = () => {
+    const navigateTo = useNavigate();
   const [showPassword, setShowPassword] = useState(false);
   const [data, setData] = useState({
     email: "",
@@ -46,6 +47,8 @@ const Login = () => {
             return;
           }
           toast.success("Login Successful.");
+          navigateTo('/');
+
         } else {
           throw new Error("Failed to sign up");
         }
