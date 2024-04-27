@@ -31,17 +31,16 @@ async function UserSignUpController(request, response) {
         }
         const payload = {
             ...request.body,
+            role: 'GENERAL',
             password: hashPassword
         }
         const userData = new UserModel(payload);
-        const saveUser = await userData.save();
-
-        response.status(201).json({
-            data : saveUser,
-            success : true,
-            error: false,
-            message: "User Created Successfully!",
-        })
+        await userData.save().then(() =>{
+            response.status(201).json({
+                success : true,
+                message: "User Created Successfully!",
+            })
+        });
 
     } catch (error) {
         response.json({

@@ -2,10 +2,12 @@ import React, { useState } from "react";
 import loginIcon from "../assets/signin.gif";
 import { FaEye } from "react-icons/fa6";
 import { FaEyeSlash } from "react-icons/fa6";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import ImageToBase64 from "../helpers/ImageToBase64";
+import { toast } from "react-toastify";
 
 const SignUp = () => {
+  const navigateTo = useNavigate();
   const [showPassword, setShowPassword] = useState(false);
   const [passwordError, setPasswordError] = useState("");
   const [ConfirmPasswordError, setConfirmPasswordError] = useState("");
@@ -56,7 +58,12 @@ const SignUp = () => {
 
           if (response.ok) {
             const json = await response.json();
-            console.log(json);
+            if (json.message === "Email Already Exists") {
+              toast.error("Email already exists.");
+            } else {
+              toast.success("Congratulation! Account Created Successfully.");
+              navigateTo('/login');
+            }
           } else {
             throw new Error("Failed to sign up");
           }
