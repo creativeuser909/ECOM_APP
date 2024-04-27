@@ -26,7 +26,7 @@ app.post('/api/productdetail', async (req, res) => {
 });
 
 
-app.get('/api/product', async (req, res) => {
+app.get('/api/products', async (req, res) => {
     try {
         const products = await Product.find({});
         res.send(products);
@@ -46,7 +46,38 @@ app.get('/api/products/:id', async (req, res) => {
     }
 })
 
+app.put('/api/products/:id', async (req, res) => {
+    try {
+        const product = await Product.findByIdAndUpdate(req.params.id, req.body);
+        if(!product) {
+            return res.status(404).send('Product not found');
+        }
+        const updatedProduct = await Product.findById(product.id);
+        res.send(updatedProduct);
+    } catch (error) {
+        console.error('Error updating product:', error);
+        res.status(500).send('Internal Server Error');
+    }
+})
 
+
+// Delete a product from Database
+
+app.delete('/api/products/:id', async (req, res) => {
+    try {
+        const getProduct = await Product.findById(req.params.id);
+        if(!getProduct) {
+            return res.status(404).send('Product not found');
+        }
+        const productName = getProduct.name;
+        await Product.findByIdAndDelete(req.params.id).then(() => {
+            return res.send(`Product "${productName}" deleted successfully`);
+        });
+    } catch (error) {
+        console.error('Error deleting product:', error);
+        res.status(500).send('Internal Server Error');
+    }
+})
 
 mongoose.connect('mongodb+srv://manishkumar:SYOOAEQ0BA6i5UWV@userdata.nrolojj.mongodb.net/apitest?retryWrites=true&w=majority&appName=apitest')
   .then(() => {
