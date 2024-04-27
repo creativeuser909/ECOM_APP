@@ -26,6 +26,28 @@ app.post('/api/productdetail', async (req, res) => {
 });
 
 
+app.get('/api/product', async (req, res) => {
+    try {
+        const products = await Product.find({});
+        res.send(products);
+    } catch (error) {
+        console.error('Error fetching products:', error);
+        res.status(500).send('Internal Server Error');
+    }
+})
+
+app.get('/api/products/:id', async (req, res) => {
+    try {
+        const product = await Product.findById(req.params.id);
+        res.send(product);
+    } catch (error) {
+        console.error('Error fetching product:', error);
+        res.status(500).send('Internal Server Error');
+    }
+})
+
+
+
 mongoose.connect('mongodb+srv://manishkumar:SYOOAEQ0BA6i5UWV@userdata.nrolojj.mongodb.net/apitest?retryWrites=true&w=majority&appName=apitest')
   .then(() => {
     console.log('MongoDB Connected');
