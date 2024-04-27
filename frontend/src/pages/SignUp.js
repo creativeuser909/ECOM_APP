@@ -7,6 +7,8 @@ import ImageToBase64 from "../helpers/ImageToBase64";
 
 const SignUp = () => {
   const [showPassword, setShowPassword] = useState(false);
+  const [passwordError, setPasswordError] = useState("");
+  const [ConfirmPasswordError, setConfirmPasswordError] = useState("");
   const [data, setData] = useState({
     firstname: "",
     lastname: "",
@@ -23,27 +25,45 @@ const SignUp = () => {
         [name]: value
       };
     });
+    if (name === "password") {
+      if (value.length < 8) {
+        setPasswordError("Password must be at least 8 characters long");
+      } else {
+        setPasswordError("");
+      }
+    }
+    if (name === "confirmpassword") {
+      if (value !== data.password) {
+        setConfirmPasswordError("Passwords do not match");
+      } else {
+        setConfirmPasswordError("");
+      }
+    }
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    try {
-      const response = await fetch("/api/signup", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify(data)
-      });
+    if (data.password === data.confirmpassword) {
+      if (data.password.length >= 8) {
+        try {
+          const response = await fetch("/api/signup", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json"
+            },
+            body: JSON.stringify(data)
+          });
 
-      if (response.ok) {
-        const json = await response.json();
-        console.log(json);
-      } else {
-        throw new Error("Failed to sign up");
+          if (response.ok) {
+            const json = await response.json();
+            console.log(json);
+          } else {
+            throw new Error("Failed to sign up");
+          }
+        } catch (error) {
+          console.error("Error:", error);
+        }
       }
-    } catch (error) {
-      console.error("Error:", error);
     }
   };
 
@@ -146,6 +166,7 @@ const SignUp = () => {
                   <span>{showPassword ? <FaEyeSlash /> : <FaEye />}</span>
                 </div>
               </div>
+              {passwordError && <p className="text-red-500">{passwordError}</p>}
             </div>
             <div>
               <label>Confirm Password : </label>
@@ -166,6 +187,9 @@ const SignUp = () => {
                   }}
                 ></div>
               </div>
+              {ConfirmPasswordError && (
+                <p className="text-red-500">{ConfirmPasswordError}</p>
+              )}
             </div>
             <button className="bg-green-600 hover:bg-green-700 text-white px-6 py-2 w-full max-w-[150px] rounded-full hover:scale-105 transition-all mx-auto block mt-6">
               Sign Up
