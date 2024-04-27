@@ -4,7 +4,6 @@ import { FaEye } from "react-icons/fa6";
 import { FaEyeSlash } from "react-icons/fa6";
 import { Link } from "react-router-dom";
 import ImageToBase64 from "../helpers/ImageToBase64";
-import SummayAPI from "../common";
 
 const SignUp = () => {
   const [showPassword, setShowPassword] = useState(false);
@@ -25,27 +24,28 @@ const SignUp = () => {
       };
     });
   };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(data);
     try {
-      const dataResponse = await fetch("http://localhost:8000/api/signup", {
+      const response = await fetch("/api/signup", {
         method: "POST",
         headers: {
           "Content-Type": "application/json"
         },
         body: JSON.stringify(data)
       });
-      if (!dataResponse.ok) {
-        throw new Error("Failed to fetch");
+
+      if (response.ok) {
+        const json = await response.json();
+        console.log(json);
+      } else {
+        throw new Error("Failed to sign up");
       }
-      const dataAPI = await dataResponse.json();
-      console.log(dataAPI);
     } catch (error) {
       console.error("Error:", error);
     }
   };
-  
 
   const handleUploadImage = async (e) => {
     const file = e.target.files[0];
