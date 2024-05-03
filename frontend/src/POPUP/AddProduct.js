@@ -3,6 +3,7 @@ import ProductCategory from "../POPUP/ProductCategory";
 import { FaCloudUploadAlt } from "react-icons/fa";
 import { MdCancel } from "react-icons/md";
 import ImageToBase64 from "../ImageConverter/ImageToBase64";
+import UploadAndStoreProduct from "../Store_Product_At/UploadAndStoreProduct";
 
 const AddProduct = ({ onClose }) => {
 	const [AllImages, setAllImages] = useState([]);
@@ -19,6 +20,7 @@ const AddProduct = ({ onClose }) => {
 			const Image = await ImageToBase64(files[i]);
 			if (Image) {
 				images.push(Image);
+				printdata(Image)
 			}
 		}
 
@@ -36,8 +38,17 @@ const AddProduct = ({ onClose }) => {
 			};
 		});
 	};
-	useEffect(() => {}, [imageProcessing, AllImages, ifImage]);
+	useEffect(() => {
+	}, [imageProcessing, AllImages, ifImage, data]);
 
+	const printdata = async (Image) =>{
+		try {
+			const response = await UploadAndStoreProduct(Image);
+			console.log(response);
+		} catch (error) {
+			console.error(error);
+		}
+	}
 	return (
 		<div className="fixed inset-0 z-50 flex items-center justify-center bg-gray-700 bg-opacity-50 gap-5">
 			<div className="h-[500px] w-[500px] bg-emerald-300 rounded shadow-md custom-scroll">
