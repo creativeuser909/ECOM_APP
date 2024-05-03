@@ -29,9 +29,9 @@ const AdminPanel = () => {
 	useEffect(() => {
 		getAllUsers();
 	}, []);
-	// const uploadPorduct = () => {
-	// 	setProduct(true);
-	// };
+	const uploadPorduct = () => {
+		setProduct(true);
+	};
 	return (
 		<div className="flex w-full h-[calc(100vh-120px)] h-min-[500px]">
 			{/* Left Sidebar */}
@@ -120,10 +120,10 @@ const AdminPanel = () => {
 			</div>
 
 				) : (
-					<div className="inset-0">
-						<div className="m-4 flex container bg-cyan-300 w-full">
-							<p>All Products</p>
-							<button>Add Product</button>
+					<div className="flex w-full bg-emerald-500">
+						<div className="pt-2 pb-2 shadow-md rounded items-center w-full h-[max-content] flex justify-between bg-zinc-500">
+							<h1 className="ml-4">All Product</h1>
+							<button className="mr-4 rounded bg-slate-400 p-4 shadow-md">Upload Product</button>
 						</div>
 					</div>
 				)
