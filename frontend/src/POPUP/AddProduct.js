@@ -9,6 +9,8 @@ const AddProduct = ({ onClose }) => {
 	const [imageProcessing, setImageProcessing] = useState(true);
 
 	const [data, setData] = useState([]);
+	const [ifImage, setIfImage] = useState(false);
+	const [imagePreview, setImagePreview] = useState(null);
 
 	async function displayImages(files) {
 		const images = [];
@@ -20,7 +22,9 @@ const AddProduct = ({ onClose }) => {
 			}
 		}
 
-		setAllImages(images);
+		setAllImages((prev) => {
+			return [...prev, ...images];
+		});
 		setImageProcessing(false);
 	}
 	const handleOnchnge = (e) => {
@@ -32,11 +36,10 @@ const AddProduct = ({ onClose }) => {
 			};
 		});
 	};
-	useEffect(() => {
-	}, [imageProcessing, AllImages]);
+	useEffect(() => {}, [imageProcessing, AllImages, ifImage]);
 
 	return (
-		<div className="fixed inset-0 z-50 flex items-center justify-center bg-gray-700 bg-opacity-50">
+		<div className="fixed inset-0 z-50 flex items-center justify-center bg-gray-700 bg-opacity-50 gap-5">
 			<div className="h-[500px] w-[500px] bg-emerald-300 rounded shadow-md custom-scroll">
 				<h1 className="uploadProduct font-poppins font-bold text-center text-3xl mt-2 mb-4">
 					Upload Products
@@ -101,11 +104,15 @@ const AddProduct = ({ onClose }) => {
 								AllImages.map((image, i) => (
 									<div
 										key={i}
-										className="w-[120px] h-[120px] bg-slate-600 rounded relative">
+										className="w-[120px] h-[120px] bg-slate-600 rounded relative"
+										onClick={() => {
+											setImagePreview(image);
+											setIfImage(true);
+										}}>
 										<img
 											src={image}
 											alt="product"
-											className="rounded w-full h-full object-cover"
+											className="rounded w-full h-full object-cover cursor-pointer"
 										/>
 										<MdCancel
 											className="absolute top-0 right-0 cursor-pointer text-2xl"
@@ -131,8 +138,7 @@ const AddProduct = ({ onClose }) => {
 									...prev,
 									images: AllImages
 								};
-							})
-							
+							});
 						}}>
 						Upload
 					</button>
@@ -145,6 +151,19 @@ const AddProduct = ({ onClose }) => {
 					</button>
 				</div>
 			</div>
+			{ifImage && (
+				<div className="relative h-[500px] rounded shadow-md flex items-center justify-center">
+					<img
+						src={imagePreview}
+						alt="Product_image"
+						className="h-full rounded"
+					/>
+					<MdCancel
+						className="absolute top-2 right-2 cursor-pointer text-2xl"
+						onClick={() => setIfImage(false)}
+					/>
+				</div>
+			)}
 		</div>
 	);
 };
