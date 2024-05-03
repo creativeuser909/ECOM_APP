@@ -2,6 +2,7 @@ const express = require("express");
 const cors = require("cors");
 require("dotenv").config();
 const router = require("./routes");
+const bodyParser = require('body-parser');
 const connectDB = require("./config/db.js");
 
 const app = express();
@@ -19,8 +20,9 @@ const app = express();
 //     }
 //   },
 // };
-
 app.use(cors());
+app.use(bodyParser.json({ limit: '10mb' }));
+app.use(bodyParser.urlencoded({ limit: '10mb', extended: true }));
 app.use(express.json());
 app.use("/manifest.json", cors());
 

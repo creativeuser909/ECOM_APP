@@ -4,6 +4,8 @@ import Home from "../pages/Home";
 import Login from "../pages/Login";
 import ForgetPassword from "../pages/ForgetPassword";
 import SignUp from "../pages/SignUp";
+import Logout from "../pages/Logout";
+import AdminPanel from "../pages/AdminPanel";
 
 const Routes = createBrowserRouter([
     {
@@ -26,6 +28,14 @@ const Routes = createBrowserRouter([
                 path : "sign-up",
                 element : <SignUp />
             },
+            {
+                path : "logout",
+                element : <Logout />
+            },
+            {
+                path : "admin",
+                element : <AdminPanel />
+            }
 
         ]
     }

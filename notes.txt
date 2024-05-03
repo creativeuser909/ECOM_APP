@@ -1,0 +1,30 @@
+	const fetchUserDetails = async () => {
+		try {
+			const token = localStorage.getItem("token");
+			const dataResponse = await fetch("/api/user-details", {
+				method: "POST",
+				credentials: "include",
+				headers: {
+                    "Content-Type": "application/json",
+					Authorization: `Bearer ${token}`
+				},
+                body: JSON.stringify({
+                    token: token,
+                })
+			});
+
+			if (!dataResponse.ok) {
+				throw new Error("Failed to fetch user details");
+			}
+
+			const dataAPI = await dataResponse.json();
+			console.log(`user-data :  ${JSON.stringify(dataAPI)}`);
+		} catch (error) {
+			console.error("Error fetching user details:", error.message);
+			toast.error("Failed to fetch user details");
+		}
+	};
+
+	useEffect(() => {
+		fetchUserDetails();
+	}, []);
