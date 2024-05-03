@@ -34,9 +34,9 @@ const AdminPanel = () => {
 		setUploadProductPanel(true);
 	};
 	return (
-		<div className="flex w-full h-[calc(100vh-120px)] h-min-[500px]">
+		<div className="flex w-full min-h-[calc(100vh-120px)]">
 			{/* Left Sidebar */}
-			<div className="w-[20%] min-w-[200px] border shadow-md h-full">
+			<div className="w-[20%] min-w-[200px] border shadow-md">
 				{/* Admin Details section */}
 				<div className="h-[25%] w-full">
 					<div className="flex justify-center items-center mt-4">
@@ -61,7 +61,7 @@ const AdminPanel = () => {
 				</div>
 
 				{/* Menu section */}
-				<div className="flex-col gap-4">
+				<div className="flex-col w-full">
 					<div
 						className="pl-6 cursor-pointer hover:bg-slate-400 rounded"
 						onClick={() => {
@@ -81,7 +81,7 @@ const AdminPanel = () => {
 			{/* Table Section */}
 			{
 				showUsers ? (
-			<div className="w-[100%] bg-red-400">
+			<div className="w-[100%]">
 				<table className="w-full userTable">
 					<thead className="text-center">
 						<th>SN.</th>

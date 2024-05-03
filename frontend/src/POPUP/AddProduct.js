@@ -8,6 +8,8 @@ const AddProduct = ({ onClose }) => {
 	const [AllImages, setAllImages] = useState([]);
 	const [imageProcessing, setImageProcessing] = useState(true);
 
+	const [data, setData] = useState([]);
+
 	async function displayImages(files) {
 		const images = [];
 
@@ -21,33 +23,47 @@ const AddProduct = ({ onClose }) => {
 		setAllImages(images);
 		setImageProcessing(false);
 	}
-
-	useEffect(() => {}, [imageProcessing, AllImages]);
+	const handleOnchnge = (e) => {
+		const { name, value } = e.target;
+		setData((prev) => {
+			return {
+				...prev,
+				[name]: value
+			};
+		});
+	};
+	useEffect(() => {
+	}, [imageProcessing, AllImages]);
 
 	return (
 		<div className="fixed inset-0 z-50 flex items-center justify-center bg-gray-700 bg-opacity-50">
-			<div className="h-[500px] w-[500px] bg-emerald-300 rounded shadow-md">
-				<h1 className="font-poppins font-bold">Upload Products</h1>
-				<div className="border m-[auto] w-[80%] flex justify-center items-center">
+			<div className="h-[500px] w-[500px] bg-emerald-300 rounded shadow-md custom-scroll">
+				<h1 className="uploadProduct font-poppins font-bold text-center text-3xl mt-2 mb-4">
+					Upload Products
+				</h1>
+				<div className="m-[auto] w-[80%] flex justify-center items-center ">
 					<div className="w-full ">
 						<label>Product Name</label>
 						<input
 							type="text"
-							name="name"
-							id="name"
+							name="productName"
+							id="productName"
+							onChange={handleOnchnge}
 							className="mb-2 w-full border border-gray-300 rounded-md p-2"
 						/>
 						<label>Brand Name</label>
 						<input
 							type="text"
-							name="name"
-							id="name"
+							name="brandName"
+							id="brandName"
+							onChange={handleOnchnge}
 							className="mb-2 w-full border border-gray-300 rounded-md p-2"
 						/>
 						<label>Category</label>
 						<select
 							name="category"
 							id="category"
+							onChange={handleOnchnge}
 							className="mb-2 w-full border border-gray-300 rounded-md p-2">
 							{ProductCategory.map((category) => (
 								<option
@@ -106,12 +122,28 @@ const AddProduct = ({ onClose }) => {
 						</div>
 					</div>
 				</div>
-				<button
-					onClick={() => {
-						onClose();
-					}}>
-					Cancel
-				</button>
+				<div className="flex justify-center gap-6 items-center mt-4 mb-4 pl-4 pr-4">
+					<button
+						className="bg-blue-600 text-white rounded px-4 py-2"
+						onClick={() => {
+							setData((prev) => {
+								return {
+									...prev,
+									images: AllImages
+								};
+							})
+							
+						}}>
+						Upload
+					</button>
+					<button
+						className="bg-red-600 text-white rounded px-4 py-2"
+						onClick={() => {
+							onClose();
+						}}>
+						Cancel
+					</button>
+				</div>
 			</div>
 		</div>
 	);

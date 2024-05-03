@@ -2,7 +2,7 @@ body{
     font-size: 1rem;
 }
 @import url("https://fonts.googleapis.com/css2?family=Poppins&display=swap");
-p{
+p, .uploadProduct{
     font-family: Poppins;
 }
 .button {
@@ -33,4 +33,35 @@ p{
 }
 .userTable td{
     @apply border text-base font-medium 
+}
+
+
+/* Hide the default scrollbar */
+::-webkit-scrollbar {
+    display: none; /* Hide scrollbar for Chrome, Safari, and Opera */
+}
+
+/* Create a custom scrollbar */
+/* This part is for Firefox */
+* {
+    scrollbar-width: thin;
+    scrollbar-color: transparent transparent;
+}
+
+/* This part is for other browsers */
+*::-webkit-scrollbar {
+    width: 8px; /* Width of the scrollbar */
+}
+*::-webkit-scrollbar-track {
+    background: transparent; /* Background color of the scrollbar track */
+}
+*::-webkit-scrollbar-thumb {
+    background-color: rgba(0, 0, 0, 0.3); /* Color of the scrollbar thumb */
+    border-radius: 8px; /* Rounded corners */
+}
+
+/* Apply scrollbar styling to your specific element */
+.custom-scroll {
+    overflow-x: hidden;
+    overflow-y: scroll;
 }
