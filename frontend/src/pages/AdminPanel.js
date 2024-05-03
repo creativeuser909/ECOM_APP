@@ -11,6 +11,7 @@ const AdminPanel = () => {
 	const [product, setProduct] = useState(false);
 	const [showUsers, setShowUsers] = useState(true);
 	const [showPorduct, setShowPorduct] = useState(false);
+	const [uploadProductPanel, setUploadProductPanel] = useState(false);
 	const getAllUsers = async () => {
 		try {
 			const response = await fetch("/api/getUsers", {
@@ -30,7 +31,7 @@ const AdminPanel = () => {
 		getAllUsers();
 	}, []);
 	const uploadPorduct = () => {
-		setProduct(true);
+		setUploadProductPanel(true);
 	};
 	return (
 		<div className="flex w-full h-[calc(100vh-120px)] h-min-[500px]">
@@ -123,7 +124,7 @@ const AdminPanel = () => {
 					<div className="flex w-full bg-emerald-500">
 						<div className="pt-2 pb-2 shadow-md rounded items-center w-full h-[max-content] flex justify-between bg-zinc-500">
 							<h1 className="ml-4">All Product</h1>
-							<button className="mr-4 rounded bg-slate-400 p-4 shadow-md">Upload Product</button>
+							<button className="mr-4 rounded bg-slate-400 p-4 shadow-md" onClick={uploadPorduct}>Upload Product</button>
 						</div>
 					</div>
 				)
@@ -134,8 +135,8 @@ const AdminPanel = () => {
 					onClose={() => setSelectedUser(null)}
 				/>
 			)}
-			{product &&
-				<AddProduct />
+			{uploadProductPanel &&
+				<AddProduct onClose={() => setUploadProductPanel(false)}/>
 			}
 		</div>
 	);
