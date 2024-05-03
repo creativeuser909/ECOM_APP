@@ -29,9 +29,9 @@ const AdminPanel = () => {
 	useEffect(() => {
 		getAllUsers();
 	}, []);
-	const uploadPorduct = () => {
-		setProduct(true);
-	};
+	// const uploadPorduct = () => {
+	// 	setProduct(true);
+	// };
 	return (
 		<div className="flex w-full h-[calc(100vh-120px)] h-min-[500px]">
 			{/* Left Sidebar */}
