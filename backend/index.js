@@ -2,8 +2,11 @@ const express = require("express");
 const cors = require("cors");
 require("dotenv").config();
 const router = require("./routes");
-const bodyParser = require('body-parser');
+const bodyParser = require("body-parser");
 const connectDB = require("./config/db.js");
+
+
+
 
 const app = express();
 
@@ -21,17 +24,18 @@ const app = express();
 //   },
 // };
 app.use(cors());
-app.use(bodyParser.json({ limit: '10mb' }));
-app.use(bodyParser.urlencoded({ limit: '10mb', extended: true }));
+app.use(bodyParser.json({ limit: "10mb" }));
+app.use(bodyParser.urlencoded({ limit: "10mb", extended: true }));
 app.use(express.json());
 app.use("/manifest.json", cors());
 
-app.use("/api", router)
+app.use("/api", router);
+
 
 const PORT = 8000 || process.env.PORT;
 connectDB().then(() => {
-  app.listen(PORT, () => {
-    console.log(`Server is running on port ${PORT}`);
-    console.log("MongoDB Connected");
-  });
+	app.listen(PORT, () => {
+		console.log(`Server is running on port ${PORT}`);
+		console.log("MongoDB Connected");
+	});
 });

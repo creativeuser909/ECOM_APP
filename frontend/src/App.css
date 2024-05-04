@@ -24,6 +24,9 @@ p, .uploadProduct{
     color: rgb(255, 255, 255);
 }
 
+
+
+
 /* User Table */
 .userTable{
     @apply bg-white

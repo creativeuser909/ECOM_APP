@@ -38,7 +38,7 @@ const AdminPanel = () => {
 			{/* Left Sidebar */}
 			<div className="w-[20%] min-w-[200px] border shadow-md">
 				{/* Admin Details section */}
-				<div className="h-[25%] w-full">
+				<div className="h-[25%] min-h-[175px] w-full">
 					<div className="flex justify-center items-center mt-4">
 						{userData.profilePic ? (
 							<img
