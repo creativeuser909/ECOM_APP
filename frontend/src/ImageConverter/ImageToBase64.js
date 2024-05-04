@@ -5,9 +5,8 @@ const ImageToBase64 = async (image) => {
         reader.onload = () => resolve(reader.result)
         reader.onerror = error => reject(error)
     })
-  return (
-    data
-  )
+    reader.abort();
+    return data
 }
 
-export default ImageToBase64
+export default ImageToBase64;
