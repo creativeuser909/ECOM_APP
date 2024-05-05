@@ -14,7 +14,7 @@ router.post("/signin", UserSignInController);
 
 router.post("/user-details", authToken, UserDetailsController);
 router.post("/update-user-details", UpdateUserDetailsController);
-router.post("/upload-product", UploadAndStoreProduct)
+router.post("/upload-product", authToken, UploadAndStoreProduct)
 router.get('/getUsers', async (req, res) =>{
     try {
         const users = await UserModel.find({});

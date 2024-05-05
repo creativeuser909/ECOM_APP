@@ -14,7 +14,7 @@ async function authToken(req, res, next) {
 				return;
 			}
 			req.userID = decoded ? decoded.userId : null;
-            // console.log(req.userID);
+            console.log(req.userID);
 			next();
 		});
 	} catch (error) {

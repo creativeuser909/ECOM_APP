@@ -3,6 +3,7 @@ import ProductCategory from "../POPUP/ProductCategory";
 import { FaCloudUploadAlt } from "react-icons/fa";
 import { MdCancel } from "react-icons/md";
 import ImageToBase64 from "../ImageConverter/ImageToBase64";
+import UploadingAnimation from "./UploadingAnimation";
 
 const AddProduct = ({ onClose }) => {
 	const [data, setData] = useState({});
@@ -11,6 +12,8 @@ const AddProduct = ({ onClose }) => {
 	const [selectedImage, setSelectedImage] = useState([]);
 	const [isPorcessing, setIsPorcessing] = useState(true);
 	const [showImage, setShowImage] = useState(null);
+	const [isUploading, setIsUploading] = useState(false);
+	const [isUploaded, setIsUploaded] = useState(false);
 	const onSelectFile = async (event) => {
 		const files = event.target.files;
 		const images = [];
@@ -34,30 +37,44 @@ const AddProduct = ({ onClose }) => {
 		}));
 	};
 	const handleSubmit = async () => {
+		const token = localStorage.getItem("token");
 		try {
 			const response = await fetch("/api/upload-product", {
 				method: "POST",
 				credentials: "include",
 				headers: {
-					"Content-Type": "application/json"
+					"Content-Type": "application/json",
+					Authorization: `Bearer ${token}`
 				},
-				body: JSON.stringify({ ...data, images: images })
+				body: JSON.stringify({ ...data, images })
 			});
 			if (!response.ok) {
 				throw new Error("Failed to add product");
 			}
 			const resData = await response.json();
 			console.log(resData);
+			setIsUploading(false);
+			setIsUploaded(true);
+			setData({
+				productName: "",
+				brandName: "",
+				category: "",
+				description: "",
+				price: "",
+				quantity: "",
+				sellingPrice: ""
+			});
+			setImages([]);
 		} catch (error) {
 			console.error(error);
 		}
 	};
 
-	useEffect(() => {}, [selectedImage, images]);
+	useEffect(() => {}, [selectedImage, images, data]);
 
 	return (
 		<div className="fixed inset-0 z-50 flex items-center justify-center bg-gray-700 bg-opacity-50 gap-5">
-			<div className="h-[500px] w-[500px] bg-emerald-300 rounded shadow-md custom-scroll">
+			<div className="h-[500px] w-[500px] bg-emerald-300 rounded shadow-md custom-scroll relative">
 				<h1 className="uploadProduct font-poppins font-bold text-center text-3xl mt-2 mb-4">
 					Upload Products
 				</h1>
@@ -67,6 +84,8 @@ const AddProduct = ({ onClose }) => {
 						<input
 							type="text"
 							name="productName"
+							value={data.productName}
+							required
 							onChange={handleOnChange}
 							className="mb-2 w-full border border-gray-300 rounded-md p-2"
 						/>
@@ -74,6 +93,7 @@ const AddProduct = ({ onClose }) => {
 						<input
 							type="text"
 							name="brandName"
+							value={data.brandName}
 							onChange={handleOnChange}
 							className="mb-2 w-full border border-gray-300 rounded-md p-2"
 						/>
@@ -82,6 +102,7 @@ const AddProduct = ({ onClose }) => {
 							name="category"
 							onChange={handleOnChange}
 							className="mb-2 w-full border border-gray-300 rounded-md p-2">
+							<option value="">Select Category</option>
 							{ProductCategory.map((category) => (
 								<option
 									key={category.id}
@@ -90,11 +111,12 @@ const AddProduct = ({ onClose }) => {
 								</option>
 							))}
 						</select>
+						{/* Image Upload */}
 						<label>Upload Product Images</label>
 						<label
 							htmlFor="UploadProductImage"
 							className="cursor-pointer">
-							<div className="w-full bg-slate-200 rounded flex items-center justify-center">
+							<div className="w-full bg-slate-200 rounded flex items-center justify-center mb-2">
 								<div>
 									<FaCloudUploadAlt className="text-6xl m-[auto]" />
 									<p>Upload Image</p>
@@ -109,6 +131,8 @@ const AddProduct = ({ onClose }) => {
 								/>
 							</div>
 						</label>
+						{/* End of Image Upload */}
+						{/* Display Images */}
 						<div
 							className="mt-4 grid grid-cols-3 gap-4"
 							id="displayImages">
@@ -142,20 +166,69 @@ const AddProduct = ({ onClose }) => {
 									</div>
 								))}
 						</div>
+						{/* End of Display Images */}
+
+						<label>Price</label>
+						<input
+							type="number"
+							name="price"
+							value={data.price}
+							onChange={handleOnChange}
+							className="mb-2 w-full border border-gray-300 rounded-md p-2"
+							required
+						/>
+						<label>Selling Price</label>
+						<input
+							type="number"
+							name="sellingPrice"
+							value={data.sellingPrice}
+							onChange={handleOnChange}
+							className="mb-2 w-full border border-gray-300 rounded-md p-2"
+						/>
+						<div>
+							<h1>Description</h1>
+						</div>
+						<textarea
+							name="description"
+							value={data.description}
+							onChange={handleOnChange}
+							className="w-full min-h-[130px] border border-gray-300 rounded-md p-2"></textarea>
 					</div>
 				</div>
-				<div className="flex justify-center gap-6 items-center mt-4 mb-4 pl-4 pr-4">
-					<button
-						className="bg-blue-600 text-white rounded px-4 py-2"
-						onClick={handleSubmit}>
-						Upload
-					</button>
-					<button
-						className="bg-red-600 text-white rounded px-4 py-2"
-						onClick={onClose}>
-						Cancel
-					</button>
-				</div>
+				{isUploaded ? (
+					<div className="flex justify-center gap-6 items-center mt-4 mb-4 pl-4 pr-4">
+						<button className="bg-blue-600 text-white rounded px-4 py-2">
+							Done
+						</button>
+						<button
+							className="bg-red-600 text-white rounded px-4 py-2"
+							onClick={() => {
+								setIsUploaded(false);
+							}}>
+							Upload Next Product
+						</button>
+						<MdCancel
+							className="absolute top-2 right-0 text-2xl bg-white rounded-full cursor-pointer"
+							onClick={onClose}
+						/>
+					</div>
+				) : (
+					<div className="flex justify-center gap-6 items-center mt-4 mb-4 pl-4 pr-4">
+						<button
+							className="bg-blue-600 text-white rounded px-4 py-2"
+							onClick={() => {
+								handleSubmit();
+								setIsUploading(true);
+							}}>
+							Upload
+						</button>
+						<button
+							className="bg-red-600 text-white rounded px-4 py-2"
+							onClick={onClose}>
+							Cancel
+						</button>
+					</div>
+				)}
 			</div>
 			{/* Image Preview Div */}
 			{imagePreview && showImage && (
@@ -176,6 +249,8 @@ const AddProduct = ({ onClose }) => {
 					</div>
 				</div>
 			)}
+			{/* End of Image Preview Div */}
+			{isUploading && <UploadingAnimation />}
 		</div>
 	);
 };

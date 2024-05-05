@@ -1,42 +1,32 @@
-
-const { v2: cloudinary } = require("cloudinary");
-cloudinary.config({
-    cloud_name: process.env.CLOUDINARY_NAME,
-    api_key: process.env.CLOUDINARY_API_KEY,
-    api_secret: process.env.CLOUDINARY_API_SECRET
-});
+// const { v2: cloudinary } = require("cloudinary");
+// cloudinary.config({
+// 	cloud_name: process.env.CLOUDINARY_NAME,
+// 	api_key: process.env.CLOUDINARY_API_KEY,
+// 	api_secret: process.env.CLOUDINARY_API_SECRET
+// });
 
 async function UploadAndStoreProduct(req, res) {
-    const data = req.body;
-    const image = data.images;
+	try {
+		const data = req.body;
+		const images = data.images;
+		const UserID = req.userID;
 
-    const recivedData = async () => {
-        try {
-            const newData = await cloudinary.uploader.upload(image[0], {
-                folder: "products",
-                resource_type: "image"
-            });
+		// const uploadedImages = [];
+		// for (const img of images) {
+		// 	const newData = await cloudinary.uploader.upload(img, {
+		// 		folder: data.category,
+		// 		resource_type: "image"
+		// 	});
+		// 	uploadedImages.push(newData);
+		// }
 
-            return newData;
-        } catch (error) {
-            console.error(error);
-            throw new Error("Error uploading image to Cloudinary");
-        }
-    };
-
-    try {
-        const response = await recivedData();
-        if(response){
-            res.send({ response, data })
-        }
-    } catch (error) {
-        res.status(500).json({ error: error.message });
-    }
+		// res.send({ response: uploadedImages, data });
+		res.send( {data, UserID} );
+	} catch (error) {
+		console.error(error);
+		res.status(500).json({ error: "Error uploading image to Cloudinary" });
+	}
 }
 
 module.exports = UploadAndStoreProduct;
 
-
-
-
-// cloudinary.v2.api.create_folder('mobiles')
