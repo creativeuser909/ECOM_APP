@@ -3,17 +3,27 @@ import ProductCategory from "../POPUP/ProductCategory";
 import { FaCloudUploadAlt } from "react-icons/fa";
 import { MdCancel } from "react-icons/md";
 import ImageToBase64 from "../ImageConverter/ImageToBase64";
-import UploadingAnimation from "./UploadingAnimation";
 import { toast } from "react-toastify";
-const AddProduct = ({ onClose, getProductList }) => {
-	const [data, setData] = useState({});
-	const [images, setImages] = useState([]);
+import UpdatingAnimation from "./UpdatingAnimation";
+const UpdateProductDetail = ({ onClose, productDetail }) => {
+	const productImages = productDetail.product.images;
+	const [data, setData] = useState({
+		productName: productDetail.product.productName,
+		brandName: productDetail.product.brandName,
+		category: productDetail.product.category,
+		description: productDetail.product.description,
+		price: productDetail.product.price,
+		quantity: productDetail.product.quantity,
+		sellingPrice: productDetail.product.price,
+		productId: productDetail.productId,
+	});
+	const [images, setImages] = useState([...productImages]);
 	const [imagePreview, setImagePreview] = useState(false);
 	const [selectedImage, setSelectedImage] = useState([]);
-	const [isPorcessing, setIsPorcessing] = useState(true);
 	const [showImage, setShowImage] = useState(null);
-	const [isUploading, setIsUploading] = useState(false);
-	const [isUploaded, setIsUploaded] = useState(false);
+	const [isUpdating, setIsUpdating] = useState(false);
+	const [isUpdated, setIsUpdated] = useState(false);
+	console.log(productDetail);
 	const onSelectFile = async (event) => {
 		const files = event.target.files;
 		const images = [];
@@ -27,7 +37,6 @@ const AddProduct = ({ onClose, getProductList }) => {
 		event.stopPropagation();
 		setSelectedImage(images);
 		setImages((prev) => [...prev, ...images]);
-		setIsPorcessing(false);
 	};
 	const handleOnChange = (e) => {
 		const { name, value } = e.target;
@@ -54,8 +63,8 @@ const AddProduct = ({ onClose, getProductList }) => {
 			const resData = await response.json();
 			toast.success(resData.message);
 			console.log(resData);
-			setIsUploading(false);
-			setIsUploaded(true);
+			setIsUpdating(false);
+			setIsUpdated(true);
 			setData({
 				productName: "",
 				brandName: "",
@@ -67,7 +76,7 @@ const AddProduct = ({ onClose, getProductList }) => {
 			});
 			setImages([]);
 		} catch (error) {
-			setIsUploading(false);
+			setIsUpdating(false);
 			toast.error(error.message);
 			console.error(error);
 		}
@@ -79,7 +88,7 @@ const AddProduct = ({ onClose, getProductList }) => {
 		<div className="fixed inset-0 z-50 flex items-center justify-center bg-gray-700 bg-opacity-50 gap-5">
 			<div className="h-[500px] w-[500px] bg-emerald-300 rounded shadow-md custom-scroll relative">
 				<h1 className="uploadProduct font-poppins font-bold text-center text-3xl mt-2 mb-4">
-					Upload Products
+					UPDATE PRODUCT DETAILS
 				</h1>
 				<div className="m-[auto] w-[80%] flex justify-center items-center ">
 					<div className="w-full ">
@@ -106,7 +115,9 @@ const AddProduct = ({ onClose, getProductList }) => {
 							onChange={handleOnChange}
 							className="mb-2 w-full border border-gray-300 rounded-md p-2"
 						>
-							<option value="">Select Category</option>
+							<option value={data.category}>
+								{data.category}
+							</option>
 							{ProductCategory.map((category) => (
 								<option
 									key={category.id}
@@ -143,7 +154,7 @@ const AddProduct = ({ onClose, getProductList }) => {
 							className="mt-4 grid grid-cols-3 gap-4"
 							id="displayImages"
 						>
-							{!isPorcessing &&
+							{images.length > 0 &&
 								images &&
 								images.map((image, index) => (
 									<div
@@ -204,30 +215,20 @@ const AddProduct = ({ onClose, getProductList }) => {
 						></textarea>
 					</div>
 				</div>
-				{isUploaded ? (
+				{issUpdated ? (
 					<div className="flex justify-center gap-6 items-center mt-4 mb-4 pl-4 pr-4">
 						<button
 							className="bg-blue-600 text-white rounded px-4 py-2"
 							onClick={() => {
 								onClose();
-								getProductList();
 							}}
 						>
 							Done
-						</button>
-						<button
-							className="bg-red-600 text-white rounded px-4 py-2"
-							onClick={() => {
-								setIsUploaded(false);
-							}}
-						>
-							Upload Next Product
 						</button>
 						<MdCancel
 							className="absolute top-2 right-0 text-2xl bg-white rounded-full cursor-pointer"
 							onClick={() => {
 								onClose();
-								getProductList();
 							}}
 						/>
 					</div>
@@ -237,10 +238,10 @@ const AddProduct = ({ onClose, getProductList }) => {
 							className="bg-blue-600 text-white rounded px-4 py-2"
 							onClick={() => {
 								handleSubmit();
-								setIsUploading(true);
+								setIsUpdating(true);
 							}}
 						>
-							Upload
+							UPDATE
 						</button>
 						<button
 							className="bg-red-600 text-white rounded px-4 py-2"
@@ -271,9 +272,9 @@ const AddProduct = ({ onClose, getProductList }) => {
 				</div>
 			)}
 			{/* End of Image Preview Div */}
-			{isUploading && <UploadingAnimation />}
+			{isUpdating && <UpdatingAnimation />}
 		</div>
 	);
 };
 
-export default AddProduct;
+export default UpdateProductDetail;
