@@ -215,7 +215,7 @@ const UpdateProductDetail = ({ onClose, productDetail }) => {
 						></textarea>
 					</div>
 				</div>
-				{issUpdated ? (
+				{isUpdated ? (
 					<div className="flex justify-center gap-6 items-center mt-4 mb-4 pl-4 pr-4">
 						<button
 							className="bg-blue-600 text-white rounded px-4 py-2"
