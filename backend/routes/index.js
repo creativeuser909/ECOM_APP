@@ -7,6 +7,8 @@ const UserDetailsController = require("../controller/UserDetails.js");
 const authToken = require("../middleware/authToken.js");
 const UpdateUserDetailsController = require("../controller/UpdateUserDetails.js");
 const UploadAndStoreProduct = require("../controller/UploadAndStroreProduct.js");
+const SaveProductToDB = require("../controller/SaveProductToDB.js");
+const SendProductList = require("../controller/SendProductList.js");
 
 router.post("/signup", UserSignUpController);
 
@@ -14,7 +16,8 @@ router.post("/signin", UserSignInController);
 
 router.post("/user-details", authToken, UserDetailsController);
 router.post("/update-user-details", UpdateUserDetailsController);
-router.post("/upload-product", authToken, UploadAndStoreProduct)
+router.post("/upload-product", authToken, UploadAndStoreProduct, SaveProductToDB);
+router.post("/get-products", authToken, SendProductList);
 router.get('/getUsers', async (req, res) =>{
     try {
         const users = await UserModel.find({});

@@ -1,12 +1,14 @@
 import React, { createContext, useEffect, useState } from "react";
 export const UserDataContext = createContext();
 export const SendData = ({ children }) => {
+	const [showUserPanel, setShowUserPanel] = useState(false);
+	const [showProductPanel, setShowProductPanel] = useState(false);
 	const [userData, setUserData] = useState({
 		token: localStorage.getItem("token") ?? "",
 		firstname: localStorage.getItem("firstname") ?? "",
 		email: localStorage.getItem("email") ?? "",
 		profilePic: localStorage.getItem("profilePic") ?? "",
-		role: localStorage.getItem("role") ?? "",
+		role: localStorage.getItem("role") ?? ""
 	});
 	const [initialized, setInitialized] = useState(true);
 	const isTokenAvialable = localStorage.getItem("token") ?? "";
@@ -71,7 +73,15 @@ export const SendData = ({ children }) => {
 	}, [isTokenAvialable, initialized, userData]);
 
 	return (
-		<UserDataContext.Provider value={[userData, setUserData]}>
+		<UserDataContext.Provider
+			value={[
+				userData,
+				setUserData,
+				showUserPanel,
+				setShowUserPanel,
+				showProductPanel,
+				setShowProductPanel
+			]}>
 			{children}
 		</UserDataContext.Provider>
 	);

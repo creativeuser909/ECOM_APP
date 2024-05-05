@@ -4,7 +4,7 @@ import { FaCloudUploadAlt } from "react-icons/fa";
 import { MdCancel } from "react-icons/md";
 import ImageToBase64 from "../ImageConverter/ImageToBase64";
 import UploadingAnimation from "./UploadingAnimation";
-
+import { toast } from "react-toastify";
 const AddProduct = ({ onClose }) => {
 	const [data, setData] = useState({});
 	const [images, setImages] = useState([]);
@@ -49,9 +49,10 @@ const AddProduct = ({ onClose }) => {
 				body: JSON.stringify({ ...data, images })
 			});
 			if (!response.ok) {
-				throw new Error("Failed to add product");
+				throw new Error("All Fields are required");
 			}
 			const resData = await response.json();
+			toast.success(resData.message);
 			console.log(resData);
 			setIsUploading(false);
 			setIsUploaded(true);
@@ -66,6 +67,8 @@ const AddProduct = ({ onClose }) => {
 			});
 			setImages([]);
 		} catch (error) {
+			setIsUploading(false);
+			toast.error(error.message);
 			console.error(error);
 		}
 	};
