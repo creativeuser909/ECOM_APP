@@ -4,39 +4,25 @@ import { MdModeEdit } from "react-icons/md";
 import UpdateProductDetail from "../../POPUP/UpdateProductDetail";
 import { MdDelete } from "react-icons/md";
 import functionList from "../../childComponent/AdminPanel/FunctionList";
+import DeletingAnimation from "../../POPUP/DeletingAnimation";
+import { UserDataContext } from "../../context/SendData";
+import { useContext } from "react";
 
-const ShowProducts = ({setShowPorduct}) => {
+// const ShowProducts = ({ setShowPorduct }) => {
+const ShowProducts = () => {
+	const { allProducts, setAllProducts } = useContext(UserDataContext);
 	const [uploadProductPanel, setUploadProductPanel] = useState(false);
 	const [updateProductPanel, setUpdateProductPanel] = useState(false);
-	const [allProducts, setAllProducts] = useState(null);
+	// const [allProducts, setAllProducts] = useState(null);
 	const [data, setData] = useState(null);
+	const [deletingProduct, setDeletingProduct] = useState(false);
 	const uploadPorduct = () => {
 		setUploadProductPanel(true);
 	};
-	const getProductList = async () => {
-		try {
-			const token = localStorage.getItem("token");
-			const response = await fetch("/api/get-products", {
-				method: "POST",
-				credentials: "include",
-				headers: {
-					"Content-Type": "application/json",
-					Authorization: `Bearer ${token}`
-				}
-			});
-
-			const data = await response.json();
-			console.log(data);
-			setAllProducts(data);
-			setShowPorduct(data)
-		} catch (error) {
-			console.log(error);
-		}
-	};
 
 	useEffect(() => {
-		getProductList();
-	}, []);
+		functionList.getProductList({ setAllProducts });
+	}, [deletingProduct, allProducts]);
 	return (
 		<div className="w-full h-full">
 			<div className="flex w-full bg-emerald-500">
@@ -44,7 +30,8 @@ const ShowProducts = ({setShowPorduct}) => {
 					<h1 className="ml-4">All Product</h1>
 					<button
 						className="mr-4 rounded bg-slate-400 p-4 shadow-md"
-						onClick={uploadPorduct}>
+						onClick={uploadPorduct}
+					>
 						Upload Product
 					</button>
 				</div>
@@ -55,8 +42,13 @@ const ShowProducts = ({setShowPorduct}) => {
 						{allProducts.map((product) => (
 							<div
 								key={product.productId}
-								className="w-[250px] h-[250px] rounded shadow-md relative flex items-center justify-center">
-								<img src={product.images[0]} alt="Product" />
+								className="w-[250px] h-[250px] rounded shadow-md relative flex items-center justify-center"
+							>
+								<img
+									src={product.images[0]}
+									alt="Product"
+									className="h-full"
+								/>
 								<div className="absolute bottom-0 right-0 bg-green-600 rounded-full p-2">
 									<MdModeEdit
 										className="text-2xl text-white cursor-pointer"
@@ -70,14 +62,11 @@ const ShowProducts = ({setShowPorduct}) => {
 									<MdDelete
 										className="text-2xl text-white cursor-pointer"
 										onClick={() => {
-											setData(product);
-											const deleteProduct =
-												functionList.DeleteProduct(
-													product
-												);
-											if (deleteProduct) {
-												getProductList();
-											}
+											setDeletingProduct(true);
+											functionList.DeleteProduct({
+												product,
+												setDeletingProduct,
+											});
 										}}
 									/>
 								</div>
@@ -89,7 +78,7 @@ const ShowProducts = ({setShowPorduct}) => {
 			{uploadProductPanel && (
 				<AddProduct
 					onClose={() => setUploadProductPanel(false)}
-					getProductList={getProductList}
+					// getProductList={getProductList}
 				/>
 			)}
 			{updateProductPanel && (
@@ -98,6 +87,7 @@ const ShowProducts = ({setShowPorduct}) => {
 					productDetail={data}
 				/>
 			)}
+			{deletingProduct && <DeletingAnimation />}
 		</div>
 	);
 };

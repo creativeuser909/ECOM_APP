@@ -1,5 +1,6 @@
-const DeleteProduct = async (data) => {
-	console.log(data);
+
+const DeleteProduct = async ({product, setDeletingProduct}) => {
+	console.log(product);
 	try {
 		const token = localStorage.getItem("token");
 		const response = await fetch("/api/delete-product", {
@@ -9,21 +10,20 @@ const DeleteProduct = async (data) => {
 				"Content-Type": "application/json",
 				Authorization: `Bearer ${token}`,
 			},
-			body: JSON.stringify(data),
+			body: JSON.stringify(product),
 		});
 
 		const result = await response.json();
 		console.log(result);
-		if (result.success) {
-			getProductList();
+		if (result) {
+			setDeletingProduct(false);
 		}
 	} catch (error) {
 		console.log(error);
 	}
 };
 
-const getProductList = async () => {
-	console.log("hello");
+const getProductList = async ({setAllProducts}) => {
 	try {
 		const token = localStorage.getItem("token");
 		const response = await fetch("/api/get-products", {
@@ -36,17 +36,12 @@ const getProductList = async () => {
 		});
 
 		const data = await response.json();
-		console.log(data);
-		return data;
+		setAllProducts(data);
 	} catch (error) {
 		console.log(error);
 	}
 };
 
-const UpdateProductDetail = async (data) => {
-	console.log(data);
-};
-
-const functionList = { DeleteProduct, UpdateProductDetail, getProductList };
+const functionList = { DeleteProduct, getProductList };
 
 export default functionList;

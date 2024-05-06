@@ -3,12 +3,14 @@ import { UserDataContext } from "../context/SendData";
 import ShowProducts from "../childComponent/AdminPanel/ShowProducts";
 import ShowUsers from "../childComponent/AdminPanel/ShowUsers";
 const AdminPanel = () => {
-	const [userData] = useContext(UserDataContext);
-	const [showUsers, setShowUsers] = useState(true);
-	const [showPorduct, setShowPorduct] = useState(false);
-	useEffect(() => {
-		
-	}, [showPorduct])
+	const {
+		userData,
+		setShowUserPanel,
+		showUserPanel,
+		showProductPanel,
+		setShowProductPanel,
+	} = useContext(UserDataContext);
+	useEffect(() => {}, [userData]);
 	return (
 		<div className="flex w-full min-h-[calc(100vh-120px)]">
 			{/* Left Sidebar */}
@@ -41,24 +43,29 @@ const AdminPanel = () => {
 					<div
 						className="pl-6 cursor-pointer hover:bg-slate-400 rounded"
 						onClick={() => {
-							setShowUsers(true);
-							setShowPorduct(false);
-						}}>
+							setShowUserPanel(true);
+							setShowProductPanel(false);
+						}}
+					>
 						<p>All Users</p>
 					</div>
 					<div
 						className="showProductList pl-6 cursor-pointer hover:bg-slate-400 rounded"
 						onClick={() => {
-							setShowUsers(false);
-							setShowPorduct(true);
-						}}>
+							setShowUserPanel(false);
+							setShowProductPanel(true);
+						}}
+					>
 						<p>Products</p>
 					</div>
 				</div>
 			</div>
 			{/* Table Section */}
-			{showUsers ? <ShowUsers /> : showPorduct && <ShowProducts setShowPorduct={setShowPorduct}/>}
-
+			{showUserPanel ? (
+				<ShowUsers />
+			) : (
+				showProductPanel && <ShowProducts />
+			)}
 		</div>
 	);
 };

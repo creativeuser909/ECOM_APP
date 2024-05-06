@@ -5,14 +5,15 @@ import { MdCancel } from "react-icons/md";
 import ImageToBase64 from "../ImageConverter/ImageToBase64";
 import UploadingAnimation from "./UploadingAnimation";
 import { toast } from "react-toastify";
-const AddProduct = ({ onClose, getProductList }) => {
+import functionList from "../childComponent/AdminPanel/FunctionList";
+const AddProduct = ({ onClose, setAllProducts, setShowPorduct }) => {
 	const [data, setData] = useState({
 		productName: "",
 		brandName: "",
 		category: "",
 		description: "",
-		price: 0,
-		quantity: 0,
+		price: "",
+		quantity: "",
 		sellingPrice: 0,
 		images: [],
 		removedImages: [],
@@ -228,7 +229,7 @@ const AddProduct = ({ onClose, getProductList }) => {
 							className="bg-blue-600 text-white rounded px-4 py-2"
 							onClick={() => {
 								onClose();
-								getProductList();
+								functionList.getProductList({setAllProducts, setShowPorduct});
 							}}>
 							Done
 						</button>
@@ -243,7 +244,7 @@ const AddProduct = ({ onClose, getProductList }) => {
 							className="absolute top-2 right-0 text-2xl bg-white rounded-full cursor-pointer"
 							onClick={() => {
 								onClose();
-								getProductList();
+								functionList.getProductList();
 							}}
 						/>
 					</div>

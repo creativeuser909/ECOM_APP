@@ -10,7 +10,7 @@ import { UserDataContext } from "../context/SendData.js";
 import UserMenu from "./UserMenu.js";
 
 const Header = () => {
-	const [userData] = useContext(UserDataContext);
+	const {userData} = useContext(UserDataContext);
 	const [showMenu, setShowMenu] = useState(false);
 	const userIconRef = useRef(null);
 	useEffect(() => {

@@ -1,14 +1,17 @@
 import React, { createContext, useEffect, useState } from "react";
 export const UserDataContext = createContext();
 export const SendData = ({ children }) => {
-	const [showUserPanel, setShowUserPanel] = useState(false);
+	const [showUserPanel, setShowUserPanel] = useState(true);
 	const [showProductPanel, setShowProductPanel] = useState(false);
+	const [allProducts, setAllProducts] = useState([]);
+	const [allUsers, setAllUsers] = useState([]);
+
 	const [userData, setUserData] = useState({
 		token: localStorage.getItem("token") ?? "",
 		firstname: localStorage.getItem("firstname") ?? "",
 		email: localStorage.getItem("email") ?? "",
 		profilePic: localStorage.getItem("profilePic") ?? "",
-		role: localStorage.getItem("role") ?? ""
+		role: localStorage.getItem("role") ?? "",
 	});
 	const [initialized, setInitialized] = useState(true);
 	const isTokenAvialable = localStorage.getItem("token") ?? "";
@@ -23,9 +26,9 @@ export const SendData = ({ children }) => {
 							credentials: "include",
 							headers: {
 								"Content-Type": "application/json",
-								Authorization: `Bearer ${token}`
+								Authorization: `Bearer ${token}`,
 							},
-							body: JSON.stringify({ token })
+							body: JSON.stringify({ token }),
 						});
 
 						if (!dataResponse.ok) {
@@ -53,7 +56,7 @@ export const SendData = ({ children }) => {
 									firstname: user_data.firstname,
 									email: user_data.email,
 									profilePic: user_data.profilePic,
-									role: user_data.role
+									role: user_data.role,
 								};
 							});
 						}
@@ -74,14 +77,19 @@ export const SendData = ({ children }) => {
 
 	return (
 		<UserDataContext.Provider
-			value={[
+			value={{
 				userData,
 				setUserData,
 				showUserPanel,
 				setShowUserPanel,
 				showProductPanel,
-				setShowProductPanel
-			]}>
+				setShowProductPanel,
+				allProducts,
+				setAllProducts,
+				allUsers,
+				setAllUsers,
+			}}
+		>
 			{children}
 		</UserDataContext.Provider>
 	);

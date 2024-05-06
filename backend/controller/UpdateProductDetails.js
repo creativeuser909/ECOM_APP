@@ -1,4 +1,5 @@
 const { v2: cloudinary } = require("cloudinary");
+const ProductModel = require("../models/ProductModel");
 cloudinary.config({
 	cloud_name: process.env.CLOUDINARY_NAME,
 	api_key: process.env.CLOUDINARY_API_KEY,
@@ -6,7 +7,7 @@ cloudinary.config({
 });
 async function UpdateProductDetail(req, res, next) {
 	try {
-		const { removedImages, images, category } = req.body;
+		const { removedImages, images, category, _id, signature } = req.body;
 		if (removedImages.length > 0) {
 			for (const image of removedImages) {
 				const parts = image.split("/");
@@ -36,7 +37,14 @@ async function UpdateProductDetail(req, res, next) {
 			}
 		}
         req.body = { ...req.body, images: url };
-        next();
+
+		const product = await ProductModel.findOneAndUpdate({ signature }, req.body, { new: true });
+		return res.status(201).json({
+			data: req.body,
+			updatedProduct: product,
+			message: "Product updated successfully!",
+			success: true
+		});
 	} catch (error) {
 		console.log(error);
 	}

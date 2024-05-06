@@ -4,7 +4,7 @@ import { ReactComponent as Triangle } from "../UI/Triangle.svg";
 import { UserDataContext } from "../context/SendData";
 import { useContext } from "react";
 const UserMenu = () => {
-	const [userData] = useContext(UserDataContext);
+	const {userData} = useContext(UserDataContext);
 	return (
 		<>
 			<div>

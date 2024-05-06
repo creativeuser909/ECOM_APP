@@ -2,9 +2,12 @@ import React, { useEffect, useState } from "react";
 import moment from "moment"; // Importing moment correctly
 import { MdModeEdit } from "react-icons/md";
 import UpdateUserDetails from "../../POPUP/UpdateUserDetails";
+import { useContext } from "react";
+import { UserDataContext } from "../../context/SendData";
 
 const ShowUsers = () => {
-    const [allUsers, setAllUsers] = useState(null);
+    const {allUsers, setAllUsers} = useContext(UserDataContext);
+    // const [allUsers, setAllUsers] = useState(null);
     const [selectedUser, setSelectedUser] = useState(null);
 
     const editUserDetails = (user) => {
