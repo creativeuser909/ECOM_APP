@@ -2,7 +2,6 @@ const ProductModel = require("../models/ProductModel");
 async function SendProductList(req, response) {
 	try {
 		const userId = req.userID;
-
 		if (!userId) {
 			return response
 				.status(400)
@@ -11,8 +10,8 @@ async function SendProductList(req, response) {
 
 		const products = await ProductModel.find({ userId });
 		const productData = products.map(product => ({
-            product,
-            productId: product._id
+            ...product.toObject(),
+			signature: product.signature
         }));
 		response.status(200).json(productData);
 	} catch (error) {

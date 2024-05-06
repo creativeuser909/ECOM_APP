@@ -6,7 +6,18 @@ import ImageToBase64 from "../ImageConverter/ImageToBase64";
 import UploadingAnimation from "./UploadingAnimation";
 import { toast } from "react-toastify";
 const AddProduct = ({ onClose, getProductList }) => {
-	const [data, setData] = useState({});
+	const [data, setData] = useState({
+		productName: "",
+		brandName: "",
+		category: "",
+		description: "",
+		price: 0,
+		quantity: 0,
+		sellingPrice: 0,
+		images: [],
+		removedImages: [],
+		signature: "",
+	});
 	const [images, setImages] = useState([]);
 	const [imagePreview, setImagePreview] = useState(false);
 	const [selectedImage, setSelectedImage] = useState([]);
@@ -14,6 +25,7 @@ const AddProduct = ({ onClose, getProductList }) => {
 	const [showImage, setShowImage] = useState(null);
 	const [isUploading, setIsUploading] = useState(false);
 	const [isUploaded, setIsUploaded] = useState(false);
+	const [sellingPrice, setSellingPrice] = useState(0);
 	const onSelectFile = async (event) => {
 		const files = event.target.files;
 		const images = [];
@@ -33,7 +45,7 @@ const AddProduct = ({ onClose, getProductList }) => {
 		const { name, value } = e.target;
 		setData((prevData) => ({
 			...prevData,
-			[name]: value,
+			[name]: value
 		}));
 	};
 	const handleSubmit = async () => {
@@ -44,9 +56,9 @@ const AddProduct = ({ onClose, getProductList }) => {
 				credentials: "include",
 				headers: {
 					"Content-Type": "application/json",
-					Authorization: `Bearer ${token}`,
+					Authorization: `Bearer ${token}`
 				},
-				body: JSON.stringify({ ...data, images }),
+				body: JSON.stringify({ ...data, images })
 			});
 			if (!response.ok) {
 				throw new Error("All Fields are required");
@@ -63,7 +75,7 @@ const AddProduct = ({ onClose, getProductList }) => {
 				description: "",
 				price: "",
 				quantity: "",
-				sellingPrice: "",
+				sellingPrice: ""
 			});
 			setImages([]);
 		} catch (error) {
@@ -72,6 +84,18 @@ const AddProduct = ({ onClose, getProductList }) => {
 			console.error(error);
 		}
 	};
+
+	useEffect(() => {
+		const price = parseInt(data.price);
+		let newPrice;
+		if (price < 500) {
+			newPrice = Math.ceil(price + price * 0.3);
+		} else {
+			newPrice = price + price * 0.3;
+			newPrice = Math.floor(Math.floor(newPrice) / 100) * 100 + 99;
+		}
+		setSellingPrice(newPrice);
+	}, [data.price]);
 
 	useEffect(() => {}, [selectedImage, images, data]);
 
@@ -104,14 +128,12 @@ const AddProduct = ({ onClose, getProductList }) => {
 						<select
 							name="category"
 							onChange={handleOnChange}
-							className="mb-2 w-full border border-gray-300 rounded-md p-2"
-						>
-							<option value="">Select Category</option>
+							className="mb-2 w-full border border-gray-300 rounded-md p-2">
+							<option value=""></option>
 							{ProductCategory.map((category) => (
 								<option
 									key={category.id}
-									value={category.value}
-								>
+									value={category.value}>
 									{category.label}
 								</option>
 							))}
@@ -120,8 +142,7 @@ const AddProduct = ({ onClose, getProductList }) => {
 						<label>Upload Product Images</label>
 						<label
 							htmlFor="UploadProductImage"
-							className="cursor-pointer"
-						>
+							className="cursor-pointer">
 							<div className="w-full bg-slate-200 rounded flex items-center justify-center mb-2">
 								<div>
 									<FaCloudUploadAlt className="text-6xl m-[auto]" />
@@ -141,15 +162,13 @@ const AddProduct = ({ onClose, getProductList }) => {
 						{/* Display Images */}
 						<div
 							className="mt-4 grid grid-cols-3 gap-4"
-							id="displayImages"
-						>
+							id="displayImages">
 							{!isPorcessing &&
 								images &&
 								images.map((image, index) => (
 									<div
 										key={index}
-										className="w-[120px] h-[120px] bg-slate-600 rounded relative"
-									>
+										className="w-[120px] h-[120px] bg-slate-600 rounded relative">
 										<img
 											src={image}
 											alt="product"
@@ -189,7 +208,7 @@ const AddProduct = ({ onClose, getProductList }) => {
 						<input
 							type="number"
 							name="sellingPrice"
-							value={data.sellingPrice}
+							value={sellingPrice}
 							onChange={handleOnChange}
 							className="mb-2 w-full border border-gray-300 rounded-md p-2"
 						/>
@@ -200,8 +219,7 @@ const AddProduct = ({ onClose, getProductList }) => {
 							name="description"
 							value={data.description}
 							onChange={handleOnChange}
-							className="w-full min-h-[130px] border border-gray-300 rounded-md p-2"
-						></textarea>
+							className="w-full min-h-[130px] border border-gray-300 rounded-md p-2"></textarea>
 					</div>
 				</div>
 				{isUploaded ? (
@@ -211,16 +229,14 @@ const AddProduct = ({ onClose, getProductList }) => {
 							onClick={() => {
 								onClose();
 								getProductList();
-							}}
-						>
+							}}>
 							Done
 						</button>
 						<button
 							className="bg-red-600 text-white rounded px-4 py-2"
 							onClick={() => {
 								setIsUploaded(false);
-							}}
-						>
+							}}>
 							Upload Next Product
 						</button>
 						<MdCancel
@@ -238,14 +254,12 @@ const AddProduct = ({ onClose, getProductList }) => {
 							onClick={() => {
 								handleSubmit();
 								setIsUploading(true);
-							}}
-						>
+							}}>
 							Upload
 						</button>
 						<button
 							className="bg-red-600 text-white rounded px-4 py-2"
-							onClick={onClose}
-						>
+							onClick={onClose}>
 							Cancel
 						</button>
 					</div>

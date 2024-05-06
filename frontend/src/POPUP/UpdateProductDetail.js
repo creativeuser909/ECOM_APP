@@ -6,24 +6,36 @@ import ImageToBase64 from "../ImageConverter/ImageToBase64";
 import { toast } from "react-toastify";
 import UpdatingAnimation from "./UpdatingAnimation";
 const UpdateProductDetail = ({ onClose, productDetail }) => {
-	const productImages = productDetail.product.images;
 	const [data, setData] = useState({
-		productName: productDetail.product.productName,
-		brandName: productDetail.product.brandName,
-		category: productDetail.product.category,
-		description: productDetail.product.description,
-		price: productDetail.product.price,
-		quantity: productDetail.product.quantity,
-		sellingPrice: productDetail.product.price,
+		productName: productDetail.productName,
+		brandName: productDetail.brandName,
+		category: productDetail.category,
+		description: productDetail.description,
+		price: productDetail.price,
+		quantity: productDetail.quantity,
+		sellingPrice: productDetail.sellingPrice,
 		productId: productDetail.productId,
+		images: productDetail.images,
+		removedImages: [],
+		signature: productDetail.signature,
 	});
-	const [images, setImages] = useState([...productImages]);
 	const [imagePreview, setImagePreview] = useState(false);
-	const [selectedImage, setSelectedImage] = useState([]);
 	const [showImage, setShowImage] = useState(null);
 	const [isUpdating, setIsUpdating] = useState(false);
 	const [isUpdated, setIsUpdated] = useState(false);
-	console.log(productDetail);
+
+	useEffect(() => {
+		const price = parseInt(data.price);
+		let sellingPrice;
+		if (price < 500) {
+			sellingPrice = Math.ceil(price + price * 0.3);
+		} else {
+			sellingPrice = price + price * 0.3;
+			sellingPrice =
+				Math.floor(Math.floor(sellingPrice) / 100) * 100 + 99;
+		}
+		setData((prev) => ({ ...prev, sellingPrice }));
+	}, [data.price]);
 	const onSelectFile = async (event) => {
 		const files = event.target.files;
 		const images = [];
@@ -35,27 +47,27 @@ const UpdateProductDetail = ({ onClose, productDetail }) => {
 		}
 		event.target.value = null;
 		event.stopPropagation();
-		setSelectedImage(images);
-		setImages((prev) => [...prev, ...images]);
+		const newImages = [...data.images, ...images];
+		setData({ ...data, images: newImages });
 	};
 	const handleOnChange = (e) => {
 		const { name, value } = e.target;
 		setData((prevData) => ({
 			...prevData,
-			[name]: value,
+			[name]: value
 		}));
 	};
 	const handleSubmit = async () => {
 		const token = localStorage.getItem("token");
 		try {
-			const response = await fetch("/api/upload-product", {
+			const response = await fetch("/api/update-product", {
 				method: "POST",
 				credentials: "include",
 				headers: {
 					"Content-Type": "application/json",
-					Authorization: `Bearer ${token}`,
+					Authorization: `Bearer ${token}`
 				},
-				body: JSON.stringify({ ...data, images }),
+				body: JSON.stringify(data)
 			});
 			if (!response.ok) {
 				throw new Error("All Fields are required");
@@ -73,8 +85,8 @@ const UpdateProductDetail = ({ onClose, productDetail }) => {
 				price: "",
 				quantity: "",
 				sellingPrice: "",
+				images: []
 			});
-			setImages([]);
 		} catch (error) {
 			setIsUpdating(false);
 			toast.error(error.message);
@@ -82,7 +94,9 @@ const UpdateProductDetail = ({ onClose, productDetail }) => {
 		}
 	};
 
-	useEffect(() => {}, [selectedImage, images, data]);
+	useEffect(() => {
+		console.log(data);
+	}, [data]);
 
 	return (
 		<div className="fixed inset-0 z-50 flex items-center justify-center bg-gray-700 bg-opacity-50 gap-5">
@@ -113,16 +127,14 @@ const UpdateProductDetail = ({ onClose, productDetail }) => {
 						<select
 							name="category"
 							onChange={handleOnChange}
-							className="mb-2 w-full border border-gray-300 rounded-md p-2"
-						>
+							className="mb-2 w-full border border-gray-300 rounded-md p-2">
 							<option value={data.category}>
 								{data.category}
 							</option>
 							{ProductCategory.map((category) => (
 								<option
 									key={category.id}
-									value={category.value}
-								>
+									value={category.value}>
 									{category.label}
 								</option>
 							))}
@@ -131,8 +143,7 @@ const UpdateProductDetail = ({ onClose, productDetail }) => {
 						<label>Upload Product Images</label>
 						<label
 							htmlFor="UploadProductImage"
-							className="cursor-pointer"
-						>
+							className="cursor-pointer">
 							<div className="w-full bg-slate-200 rounded flex items-center justify-center mb-2">
 								<div>
 									<FaCloudUploadAlt className="text-6xl m-[auto]" />
@@ -152,15 +163,12 @@ const UpdateProductDetail = ({ onClose, productDetail }) => {
 						{/* Display Images */}
 						<div
 							className="mt-4 grid grid-cols-3 gap-4"
-							id="displayImages"
-						>
-							{images.length > 0 &&
-								images &&
-								images.map((image, index) => (
+							id="displayImages">
+							{data.images.length > 0 &&
+								data.images.map((image, index) => (
 									<div
 										key={index}
-										className="w-[120px] h-[120px] bg-slate-600 rounded relative"
-									>
+										className="w-[120px] h-[120px] bg-slate-600 rounded relative">
 										<img
 											src={image}
 											alt="product"
@@ -173,11 +181,28 @@ const UpdateProductDetail = ({ onClose, productDetail }) => {
 										<MdCancel
 											className="absolute top-0 right-0 text-2xl bg-white rounded-full cursor-pointer"
 											onClick={() => {
-												setImages(
-													images.filter(
-														(e) => e !== image
-													)
-												);
+												if (image.startsWith("https")) {
+													const removedImages = [
+														...data.removedImages,
+														image
+													];
+													setData({
+														...data,
+														images: data.images.filter(
+															(img) =>
+																img !== image
+														),
+														removedImages
+													});
+												} else {
+													setData({
+														...data,
+														images: data.images.filter(
+															(img) =>
+																img !== image
+														)
+													});
+												}
 												setImagePreview(false);
 												setShowImage(null);
 											}}
@@ -211,8 +236,7 @@ const UpdateProductDetail = ({ onClose, productDetail }) => {
 							name="description"
 							value={data.description}
 							onChange={handleOnChange}
-							className="w-full min-h-[130px] border border-gray-300 rounded-md p-2"
-						></textarea>
+							className="w-full min-h-[130px] border border-gray-300 rounded-md p-2"></textarea>
 					</div>
 				</div>
 				{isUpdated ? (
@@ -221,8 +245,7 @@ const UpdateProductDetail = ({ onClose, productDetail }) => {
 							className="bg-blue-600 text-white rounded px-4 py-2"
 							onClick={() => {
 								onClose();
-							}}
-						>
+							}}>
 							Done
 						</button>
 						<MdCancel
@@ -239,14 +262,12 @@ const UpdateProductDetail = ({ onClose, productDetail }) => {
 							onClick={() => {
 								handleSubmit();
 								setIsUpdating(true);
-							}}
-						>
+							}}>
 							UPDATE
 						</button>
 						<button
 							className="bg-red-600 text-white rounded px-4 py-2"
-							onClick={onClose}
-						>
+							onClick={onClose}>
 							Cancel
 						</button>
 					</div>

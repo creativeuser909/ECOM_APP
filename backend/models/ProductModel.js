@@ -21,8 +21,12 @@ const productSchema = new mongoose.Schema(
 				required: true
 			}
 		],
-		brandName: {
+		signature: {
 			type: String,
+			required: true
+		},
+		brandName: {
+			type: String
 		},
 		category: {
 			type: String,

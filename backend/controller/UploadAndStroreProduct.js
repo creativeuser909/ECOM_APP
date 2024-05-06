@@ -1,4 +1,5 @@
 const { v2: cloudinary } = require("cloudinary");
+const Product = require("../../API/model/porduct.model");
 cloudinary.config({
 	cloud_name: process.env.CLOUDINARY_NAME,
 	api_key: process.env.CLOUDINARY_API_KEY,
@@ -12,14 +13,18 @@ async function UploadAndStoreProduct(req, res, next) {
 		const UserID = req.userID;
 
 		const uploadedImages = [];
+		const signatureList = [];
 		for (const img of images) {
 			const newData = await cloudinary.uploader.upload(img, {
 				folder: data.category,
 				resource_type: "image"
 			});
 			uploadedImages.push(newData.secure_url);
+			signatureList.push(newData.signature);
 		}
-		req.body = { ...data, images: uploadedImages, price: data.sellingPrice };
+		const signature = `${signatureList[0]}`;
+		console.log(signature)
+		req.body = { ...data, images: uploadedImages, signature};
 		next();
 	} catch (error) {
 		console.error(error);
