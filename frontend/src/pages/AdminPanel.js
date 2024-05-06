@@ -6,7 +6,9 @@ const AdminPanel = () => {
 	const [userData] = useContext(UserDataContext);
 	const [showUsers, setShowUsers] = useState(true);
 	const [showPorduct, setShowPorduct] = useState(false);
-	
+	useEffect(() => {
+		
+	}, [showPorduct])
 	return (
 		<div className="flex w-full min-h-[calc(100vh-120px)]">
 			{/* Left Sidebar */}
@@ -55,7 +57,7 @@ const AdminPanel = () => {
 				</div>
 			</div>
 			{/* Table Section */}
-			{showUsers ? <ShowUsers /> : showPorduct && <ShowProducts />}
+			{showUsers ? <ShowUsers /> : showPorduct && <ShowProducts setShowPorduct={setShowPorduct}/>}
 
 		</div>
 	);

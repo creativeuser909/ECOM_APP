@@ -5,7 +5,7 @@ import UpdateProductDetail from "../../POPUP/UpdateProductDetail";
 import { MdDelete } from "react-icons/md";
 import functionList from "../../childComponent/AdminPanel/FunctionList";
 
-const ShowProducts = () => {
+const ShowProducts = ({setShowPorduct}) => {
 	const [uploadProductPanel, setUploadProductPanel] = useState(false);
 	const [updateProductPanel, setUpdateProductPanel] = useState(false);
 	const [allProducts, setAllProducts] = useState(null);
@@ -28,6 +28,7 @@ const ShowProducts = () => {
 			const data = await response.json();
 			console.log(data);
 			setAllProducts(data);
+			setShowPorduct(data)
 		} catch (error) {
 			console.log(error);
 		}
