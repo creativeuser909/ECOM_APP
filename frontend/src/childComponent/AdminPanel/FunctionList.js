@@ -1,29 +1,28 @@
-
-const DeleteProduct = async ({product, setDeletingProduct}) => {
+const DeconsteProduct = async ({ product, setDeconstingProduct }) => {
 	console.log(product);
 	try {
 		const token = localStorage.getItem("token");
-		const response = await fetch("/api/delete-product", {
+		const response = await fetch("/api/deconste-product", {
 			method: "POST",
 			credentials: "include",
 			headers: {
 				"Content-Type": "application/json",
-				Authorization: `Bearer ${token}`,
+				Authorization: `Bearer ${token}`
 			},
-			body: JSON.stringify(product),
+			body: JSON.stringify(product)
 		});
 
 		const result = await response.json();
 		console.log(result);
 		if (result) {
-			setDeletingProduct(false);
+			setDeconstingProduct(false);
 		}
 	} catch (error) {
 		console.log(error);
 	}
 };
 
-const getProductList = async ({setAllProducts}) => {
+const getProductList = async ({ setAllProducts }) => {
 	try {
 		const token = localStorage.getItem("token");
 		const response = await fetch("/api/get-products", {
@@ -31,8 +30,8 @@ const getProductList = async ({setAllProducts}) => {
 			credentials: "include",
 			headers: {
 				"Content-Type": "application/json",
-				Authorization: `Bearer ${token}`,
-			},
+				Authorization: `Bearer ${token}`
+			}
 		});
 
 		const data = await response.json();
@@ -47,10 +46,34 @@ const displayCurrency = (sellingPrice) => {
 	const formatter = new Intl.NumberFormat("en-US", {
 		style: "currency",
 		currency: "INR",
-		minimumFractionDigits: 2,
-	})
+		minimumFractionDigits: 2
+	});
 	return formatter.format(sellingPrice);
-}
-const functionList = { DeleteProduct, getProductList, displayCurrency };
+};
+
+const resetProductDetail = ({ setProductDetail, productDetail }) => {
+	setProductDetail({
+		productName: "",
+		brandName: "",
+		category: "Select Category",
+		description: "",
+		price: 0,
+		quantity: 0,
+		sellingPrice: 0,
+		productId: "",
+		images: [],
+		removedImages: [],
+		signature: "",
+		userId: ""
+	});
+	return productDetail;
+};
+
+const functionList = {
+	DeconsteProduct,
+	getProductList,
+	displayCurrency,
+	resetProductDetail,
+};
 
 export default functionList;

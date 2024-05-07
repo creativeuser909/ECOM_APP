@@ -64,7 +64,7 @@ const AddProduct = ({ onClose, setShowPorduct }) => {
 			setProductDetail({
 				productName: "",
 				brandName: "",
-				category: null,
+				category: "Select Product",
 				description: "",
 				price: "",
 				quantity: "",
@@ -124,7 +124,7 @@ const AddProduct = ({ onClose, setShowPorduct }) => {
 							onChange={handleOnChange}
 							className="mb-2 w-full border border-gray-300 rounded-md p-2"
 						>
-							<option value=""></option>
+							<option value="Select Category" selected>Select Category</option>
 							{ProductCategory.map((category) => (
 								<option
 									key={category.id}
@@ -241,8 +241,16 @@ const AddProduct = ({ onClose, setShowPorduct }) => {
 						</button>
 						<button
 							className="bg-red-600 text-white rounded px-4 py-2"
-							onClick={() => {
-								setIsUploaded(false);
+							onClick={async () => {
+								const response = async () =>
+									functionList.resetProductDetail({
+										setProductDetail, productDetail
+									});
+								const resetedProductDetail = await response();
+								if (resetedProductDetail) {
+									setProductDetail(resetedProductDetail);
+									setIsUploaded(false);
+								}
 							}}
 						>
 							Upload Next Product

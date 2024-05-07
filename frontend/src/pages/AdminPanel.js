@@ -12,7 +12,7 @@ const AdminPanel = () => {
 	} = useContext(UserDataContext);
 	useEffect(() => {}, [userData]);
 	return (
-		<div className="flex w-full min-h-[calc(100vh-120px)]">
+		<div className="adminPanelMainDiv flex w-full min-h-[calc(100vh-120px)]">
 			{/* Left Sidebar */}
 			<div className="w-[20%] min-w-[200px] border shadow-md">
 				{/* Admin Details section */}

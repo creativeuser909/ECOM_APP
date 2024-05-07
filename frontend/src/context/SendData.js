@@ -17,7 +17,7 @@ export const SendData = ({ children }) => {
 	const [productDetail, setProductDetail] = useState({
 		productName: "",
 		brandName: "",
-		category: null,
+		category: "Select Category",
 		description: "",
 		price: 0,
 		quantity: 0,
