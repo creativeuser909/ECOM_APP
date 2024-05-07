@@ -1,4 +1,4 @@
-const ProductModel = require("../models/ProductModel");
+const ProductModel = require("../../models/ProductModel");
 async function SendProductList(req, response) {
 	try {
 		const userId = req.userID;
@@ -9,10 +9,10 @@ async function SendProductList(req, response) {
 		}
 
 		const products = await ProductModel.find({ userId });
-		const productData = products.map(product => ({
-            ...product.toObject(),
+		const productData = products.map((product) => ({
+			...product.toObject(),
 			signature: product.signature
-        }));
+		}));
 		response.status(200).json(productData);
 	} catch (error) {
 		console.error("Failed to fetch products:", error);

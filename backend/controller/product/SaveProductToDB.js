@@ -1,4 +1,4 @@
-const ProductModel = require("../models/ProductModel");
+const ProductModel = require("../../models/ProductModel");
 async function SaveProductToDB(req, response) {
 	try {
 		const {
@@ -10,9 +10,16 @@ async function SaveProductToDB(req, response) {
 			quantity,
 			brandName,
 			signature,
-			sellingPrice,
+			sellingPrice
 		} = req.body;
-		if (!productName || !description || !brandName || !price || !images || !category) {
+		if (
+			!productName ||
+			!description ||
+			!brandName ||
+			!price ||
+			!images ||
+			!category
+		) {
 			return response
 				.status(400)
 				.json({ message: "All fields are required" });
@@ -31,14 +38,14 @@ async function SaveProductToDB(req, response) {
 			category: lowrcaseCategory,
 			quantity,
 			signature,
-			sellingPrice,
+			sellingPrice
 		};
 		const newProduct = new ProductModel(productData);
 		await newProduct.save().then(() => {
 			response.status(201).json({
 				data: newProduct,
 				success: true,
-				message: "Product uploaded Successfully!",
+				message: "Product uploaded Successfully!"
 			});
 		});
 	} catch (error) {

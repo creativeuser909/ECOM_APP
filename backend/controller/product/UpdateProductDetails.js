@@ -1,5 +1,5 @@
 const { v2: cloudinary } = require("cloudinary");
-const ProductModel = require("../models/ProductModel");
+const ProductModel = require("../../models/ProductModel");
 cloudinary.config({
 	cloud_name: process.env.CLOUDINARY_NAME,
 	api_key: process.env.CLOUDINARY_API_KEY,
@@ -36,9 +36,13 @@ async function UpdateProductDetail(req, res, next) {
 				}
 			}
 		}
-        req.body = { ...req.body, images: url };
+		req.body = { ...req.body, images: url };
 
-		const product = await ProductModel.findOneAndUpdate({ signature }, req.body, { new: true });
+		const product = await ProductModel.findOneAndUpdate(
+			{ signature },
+			req.body,
+			{ new: true }
+		);
 		return res.status(201).json({
 			message: "Product updated successfully!",
 			success: true

@@ -5,7 +5,7 @@ import { MdCancel } from "react-icons/md";
 import ImageToBase64 from "../ImageConverter/ImageToBase64";
 import UploadingAnimation from "./UploadingAnimation";
 import { toast } from "react-toastify";
-import functionList from "../childComponent/AdminPanel/FunctionList";
+import functionList from "../Function/FunctionList";
 import { useContext } from "react";
 import { UserDataContext } from "../context/SendData";
 const AddProduct = ({ onClose, setShowPorduct }) => {
@@ -38,7 +38,7 @@ const AddProduct = ({ onClose, setShowPorduct }) => {
 		const { name, value } = e.target;
 		setProductDetail((prevproductDetail) => ({
 			...prevproductDetail,
-			[name]: value,
+			[name]: value
 		}));
 	};
 	const handleSubmit = async () => {
@@ -49,9 +49,9 @@ const AddProduct = ({ onClose, setShowPorduct }) => {
 				credentials: "include",
 				headers: {
 					"Content-Type": "application/json",
-					Authorization: `Bearer ${token}`,
+					Authorization: `Bearer ${token}`
 				},
-				body: JSON.stringify({ ...productDetail, images }),
+				body: JSON.stringify({ ...productDetail, images })
 			});
 			if (!response.ok) {
 				throw new Error("All Fields are required");
@@ -68,7 +68,7 @@ const AddProduct = ({ onClose, setShowPorduct }) => {
 				description: "",
 				price: "",
 				quantity: "",
-				sellingPrice: "",
+				sellingPrice: ""
 			});
 			setImages([]);
 		} catch (error) {
@@ -122,14 +122,14 @@ const AddProduct = ({ onClose, setShowPorduct }) => {
 						<select
 							name="category"
 							onChange={handleOnChange}
-							className="mb-2 w-full border border-gray-300 rounded-md p-2"
-						>
-							<option value="Select Category" selected>Select Category</option>
+							className="mb-2 w-full border border-gray-300 rounded-md p-2">
+							<option value="Select Category" selected>
+								Select Category
+							</option>
 							{ProductCategory.map((category) => (
 								<option
 									key={category.id}
-									value={category.value}
-								>
+									value={category.value}>
 									{category.label}
 								</option>
 							))}
@@ -138,8 +138,7 @@ const AddProduct = ({ onClose, setShowPorduct }) => {
 						<label>Upload Product Images</label>
 						<label
 							htmlFor="UploadProductImage"
-							className="cursor-pointer"
-						>
+							className="cursor-pointer">
 							<div className="w-full bg-slate-200 rounded flex items-center justify-center mb-2">
 								<div>
 									<FaCloudUploadAlt className="text-6xl m-[auto]" />
@@ -159,15 +158,13 @@ const AddProduct = ({ onClose, setShowPorduct }) => {
 						{/* Display Images */}
 						<div
 							className="mt-4 grid grid-cols-3 gap-4"
-							id="displayImages"
-						>
+							id="displayImages">
 							{!isPorcessing &&
 								images &&
 								images.map((image, index) => (
 									<div
 										key={index}
-										className="w-[120px] h-[120px] bg-slate-600 rounded relative"
-									>
+										className="w-[120px] h-[120px] bg-slate-600 rounded relative">
 										<img
 											src={image}
 											alt="product"
@@ -218,8 +215,7 @@ const AddProduct = ({ onClose, setShowPorduct }) => {
 							name="description"
 							value={productDetail.description}
 							onChange={handleOnChange}
-							className="w-full min-h-[130px] border border-gray-300 rounded-md p-2"
-						></textarea>
+							className="w-full min-h-[130px] border border-gray-300 rounded-md p-2"></textarea>
 					</div>
 				</div>
 				{isUploaded ? (
@@ -229,14 +225,13 @@ const AddProduct = ({ onClose, setShowPorduct }) => {
 							onClick={async () => {
 								const response = async () =>
 									functionList.getProductList({
-										setAllProducts,
+										setAllProducts
 									});
 								const productDetail = await response();
 								if (productDetail) {
 									onClose();
 								}
-							}}
-						>
+							}}>
 							Done
 						</button>
 						<button
@@ -244,15 +239,15 @@ const AddProduct = ({ onClose, setShowPorduct }) => {
 							onClick={async () => {
 								const response = async () =>
 									functionList.resetProductDetail({
-										setProductDetail, productDetail
+										setProductDetail,
+										productDetail
 									});
 								const resetedProductDetail = await response();
 								if (resetedProductDetail) {
 									setProductDetail(resetedProductDetail);
 									setIsUploaded(false);
 								}
-							}}
-						>
+							}}>
 							Upload Next Product
 						</button>
 						<MdCancel
@@ -269,14 +264,12 @@ const AddProduct = ({ onClose, setShowPorduct }) => {
 							onClick={() => {
 								handleSubmit();
 								setIsUploading(true);
-							}}
-						>
+							}}>
 							Upload
 						</button>
 						<button
 							className="bg-red-600 text-white rounded px-4 py-2"
-							onClick={onClose}
-						>
+							onClick={onClose}>
 							Cancel
 						</button>
 					</div>

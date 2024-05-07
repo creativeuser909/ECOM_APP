@@ -69,11 +69,30 @@ const resetProductDetail = ({ setProductDetail, productDetail }) => {
 	return productDetail;
 };
 
+const GetProductCategory = async ({setCategoriesList}) => {
+	try {
+		const response = await fetch("/api/get-product-category", {
+			method: "POST",
+			credentials: "include",
+			headers: {
+				"Content-Type": "application/json"
+			}
+		});
+		const data = await response.json();
+		console.log(data);
+		setCategoriesList(data);
+	} catch (error) {
+		
+	}
+}
+
+
 const functionList = {
 	DeconsteProduct,
 	getProductList,
 	displayCurrency,
 	resetProductDetail,
+	GetProductCategory,
 };
 
 export default functionList;

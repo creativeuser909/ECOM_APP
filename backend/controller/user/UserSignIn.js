@@ -1,4 +1,4 @@
-const UserModel = require("../models/UserModel.js");
+const UserModel = require("../../models/UserModel.js");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const cookie = require("cookie");
@@ -13,21 +13,16 @@ async function UserSignInController(req, res) {
 				message: "User not found"
 			});
 		}
-		const isPasswordValid = await bcrypt.compare(
-			password,
-			user.password
-		);
+		const isPasswordValid = await bcrypt.compare(password, user.password);
 		if (!isPasswordValid) {
 			return res.json({
 				status: "error",
 				message: "Password is incorrect"
 			});
 		}
-		const token = jwt.sign(
-			{ userId: user._id },
-			process.env.JWT_SECRET,
-			{ expiresIn:  60 * 60 * 24 * 7}
-		);
+		const token = jwt.sign({ userId: user._id }, process.env.JWT_SECRET, {
+			expiresIn: 60 * 60 * 24 * 7
+		});
 
 		res.setHeader(
 			"Set-Cookie",

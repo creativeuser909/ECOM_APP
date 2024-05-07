@@ -1,4 +1,4 @@
-const UserModel = require("../models/UserModel");
+const UserModel = require("../../models/UserModel");
 async function UserDetailsController(req, res) {
 	try {
 		console.log("User ID : ", req.userID);
@@ -10,9 +10,9 @@ async function UserDetailsController(req, res) {
 			success: true,
 			message: "User details fetched successfully",
 			user: {
-				fistname : userDetails.firstname,
-				email : userDetails.email,
-				profilePic : userDetails.profilePic,
+				fistname: userDetails.firstname,
+				email: userDetails.email,
+				profilePic: userDetails.profilePic
 			}
 		});
 	} catch (error) {

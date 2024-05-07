@@ -1,6 +1,6 @@
 const { response } = require("express");
 const bcrypt = require("bcrypt");
-const UserModel = require("../models/UserModel");
+const UserModel = require("../../models/UserModel");
 
 async function UserSignUpController(request, response) {
 	try {

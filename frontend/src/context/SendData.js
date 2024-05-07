@@ -11,7 +11,7 @@ export const SendData = ({ children }) => {
 		firstname: localStorage.getItem("firstname") ?? "",
 		email: localStorage.getItem("email") ?? "",
 		profilePic: localStorage.getItem("profilePic") ?? "",
-		role: localStorage.getItem("role") ?? "",
+		role: localStorage.getItem("role") ?? ""
 	});
 	const [productsList, setProductsList] = useState([]);
 	const [productDetail, setProductDetail] = useState({
@@ -26,8 +26,11 @@ export const SendData = ({ children }) => {
 		images: [],
 		removedImages: [],
 		signature: "",
-		userId: "",
+		userId: ""
 	});
+
+	const [categoriesList, setCategoriesList] = useState([]);
+
 	const [initialized, setInitialized] = useState(true);
 	const isTokenAvialable = localStorage.getItem("token") ?? "";
 	useEffect(() => {
@@ -41,9 +44,9 @@ export const SendData = ({ children }) => {
 							credentials: "include",
 							headers: {
 								"Content-Type": "application/json",
-								Authorization: `Bearer ${token}`,
+								Authorization: `Bearer ${token}`
 							},
-							body: JSON.stringify({ token }),
+							body: JSON.stringify({ token })
 						});
 
 						if (!dataResponse.ok) {
@@ -71,7 +74,7 @@ export const SendData = ({ children }) => {
 									firstname: user_data.firstname,
 									email: user_data.email,
 									profilePic: user_data.profilePic,
-									role: user_data.role,
+									role: user_data.role
 								};
 							});
 						}
@@ -107,8 +110,9 @@ export const SendData = ({ children }) => {
 				setProductDetail,
 				productsList,
 				setProductsList,
-			}}
-		>
+				categoriesList,
+				setCategoriesList
+			}}>
 			{children}
 		</UserDataContext.Provider>
 	);

@@ -1,5 +1,5 @@
 const { v2: cloudinary } = require("cloudinary");
-const Product = require("../../API/model/porduct.model");
+const Product = require("../../../API/model/porduct.model");
 cloudinary.config({
 	cloud_name: process.env.CLOUDINARY_NAME,
 	api_key: process.env.CLOUDINARY_API_KEY,
@@ -23,8 +23,8 @@ async function UploadAndStoreProduct(req, res, next) {
 			signatureList.push(newData.signature);
 		}
 		const signature = `${signatureList[0]}`;
-		console.log(signature)
-		req.body = { ...data, images: uploadedImages, signature};
+		console.log(signature);
+		req.body = { ...data, images: uploadedImages, signature };
 		next();
 	} catch (error) {
 		console.error(error);
@@ -33,4 +33,3 @@ async function UploadAndStoreProduct(req, res, next) {
 }
 
 module.exports = UploadAndStoreProduct;
-

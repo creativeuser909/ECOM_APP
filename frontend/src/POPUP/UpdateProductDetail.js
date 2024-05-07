@@ -5,7 +5,7 @@ import { MdCancel } from "react-icons/md";
 import ImageToBase64 from "../ImageConverter/ImageToBase64";
 import { toast } from "react-toastify";
 import UpdatingAnimation from "./UpdatingAnimation";
-import functionList from "../childComponent/AdminPanel/FunctionList";
+import functionList from "../Function/FunctionList";
 import { useContext } from "react";
 import { UserDataContext } from "../context/SendData";
 const UpdateProductDetail = ({ onClose }) => {
@@ -46,7 +46,7 @@ const UpdateProductDetail = ({ onClose }) => {
 		const { name, value } = e.target;
 		setProductDetail((prevData) => ({
 			...prevData,
-			[name]: value,
+			[name]: value
 		}));
 	};
 	const handleSubmit = async () => {
@@ -57,9 +57,9 @@ const UpdateProductDetail = ({ onClose }) => {
 				credentials: "include",
 				headers: {
 					"Content-Type": "application/json",
-					Authorization: `Bearer ${token}`,
+					Authorization: `Bearer ${token}`
 				},
-				body: JSON.stringify(productDetail),
+				body: JSON.stringify(productDetail)
 			});
 			if (!response.ok) {
 				throw new Error("All Fields are required");
@@ -77,7 +77,7 @@ const UpdateProductDetail = ({ onClose }) => {
 				price: "",
 				quantity: "",
 				sellingPrice: "",
-				images: [],
+				images: []
 			});
 		} catch (error) {
 			setIsUpdating(false);
@@ -117,16 +117,14 @@ const UpdateProductDetail = ({ onClose }) => {
 						<select
 							name="category"
 							onChange={handleOnChange}
-							className="mb-2 w-full border border-gray-300 rounded-md p-2"
-						>
+							className="mb-2 w-full border border-gray-300 rounded-md p-2">
 							<option value={productDetail.category}>
 								{productDetail.category}
 							</option>
 							{ProductCategory.map((category) => (
 								<option
 									key={category.id}
-									value={category.value}
-								>
+									value={category.value}>
 									{category.label}
 								</option>
 							))}
@@ -135,8 +133,7 @@ const UpdateProductDetail = ({ onClose }) => {
 						<label>Upload Product Images</label>
 						<label
 							htmlFor="UploadProductImage"
-							className="cursor-pointer"
-						>
+							className="cursor-pointer">
 							<div className="w-full bg-slate-200 rounded flex items-center justify-center mb-2">
 								<div>
 									<FaCloudUploadAlt className="text-6xl m-[auto]" />
@@ -156,14 +153,12 @@ const UpdateProductDetail = ({ onClose }) => {
 						{/* Display Images */}
 						<div
 							className="mt-4 grid grid-cols-3 gap-4"
-							id="displayImages"
-						>
+							id="displayImages">
 							{productDetail.images.length > 0 &&
 								productDetail.images.map((image, index) => (
 									<div
 										key={index}
-										className="w-[120px] h-[120px] bg-slate-600 rounded relative"
-									>
+										className="w-[120px] h-[120px] bg-slate-600 rounded relative">
 										<img
 											src={image}
 											alt="product"
@@ -179,7 +174,7 @@ const UpdateProductDetail = ({ onClose }) => {
 												if (image.startsWith("https")) {
 													const removedImages = [
 														...productDetail.removedImages,
-														image,
+														image
 													];
 													setProductDetail({
 														...productDetail,
@@ -187,7 +182,7 @@ const UpdateProductDetail = ({ onClose }) => {
 															(img) =>
 																img !== image
 														),
-														removedImages,
+														removedImages
 													});
 												} else {
 													setProductDetail({
@@ -195,7 +190,7 @@ const UpdateProductDetail = ({ onClose }) => {
 														images: productDetail.images.filter(
 															(img) =>
 																img !== image
-														),
+														)
 													});
 												}
 												setImagePreview(false);
@@ -231,8 +226,7 @@ const UpdateProductDetail = ({ onClose }) => {
 							name="description"
 							value={productDetail.description}
 							onChange={handleOnChange}
-							className="w-full min-h-[130px] border border-gray-300 rounded-md p-2"
-						></textarea>
+							className="w-full min-h-[130px] border border-gray-300 rounded-md p-2"></textarea>
 					</div>
 				</div>
 				{isUpdated ? (
@@ -242,14 +236,13 @@ const UpdateProductDetail = ({ onClose }) => {
 							onClick={async () => {
 								const res = async () =>
 									await functionList.getProductList({
-										setAllProducts,
+										setAllProducts
 									});
 								const data = await res();
 								if (data) {
 									onClose();
 								}
-							}}
-						>
+							}}>
 							Done
 						</button>
 						<MdCancel
@@ -266,14 +259,12 @@ const UpdateProductDetail = ({ onClose }) => {
 							onClick={() => {
 								handleSubmit();
 								setIsUpdating(true);
-							}}
-						>
+							}}>
 							UPDATE
 						</button>
 						<button
 							className="bg-red-600 text-white rounded px-4 py-2"
-							onClick={onClose}
-						>
+							onClick={onClose}>
 							Cancel
 						</button>
 					</div>

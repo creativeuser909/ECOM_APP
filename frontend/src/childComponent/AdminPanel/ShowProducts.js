@@ -3,7 +3,7 @@ import AddProduct from "../../POPUP/AddProduct";
 import { MdModeEdit } from "react-icons/md";
 import UpdateProductDetail from "../../POPUP/UpdateProductDetail";
 import { MdDelete } from "react-icons/md";
-import functionList from "../../childComponent/AdminPanel/FunctionList";
+import functionList from "../../Function/FunctionList";
 import DeletingAnimation from "../../POPUP/DeletingAnimation";
 import { UserDataContext } from "../../context/SendData";
 import { useContext } from "react";
@@ -26,7 +26,9 @@ const ShowProducts = () => {
 	);
 
 	console.log(
-		"Total height of all 'allProducts' divs: " + adminPanelMainDivHeight + "px"
+		"Total height of all 'allProducts' divs: " +
+			adminPanelMainDivHeight +
+			"px"
 	);
 
 	useEffect(() => {
@@ -59,7 +61,9 @@ const ShowProducts = () => {
 									/>
 									<div className="text-sm">
 										<p>{product.productName}</p>
-										<p className="text-ellipsis line-clamp-1">{product.description}</p>
+										<p className="text-ellipsis line-clamp-1">
+											{product.description}
+										</p>
 										<p className="font-semibold">
 											{functionList.displayCurrency(
 												product.sellingPrice
