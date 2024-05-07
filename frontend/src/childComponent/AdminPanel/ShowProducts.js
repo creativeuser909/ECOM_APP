@@ -50,15 +50,16 @@ const ShowProducts = () => {
 						{allProducts.map((product) => (
 							<div
 								key={product.productId}
-								className="w-[250px] h-[250px] rounded shadow-md relative flex items-center justify-center">
-								<div className="w-full h-full p-2 rounded">
+								className="w-[250px] h-[300px] rounded shadow-md relative flex items-center justify-center">
+								<div className="h-full p-2 rounded ">
 									<img
 										src={product.images[0]}
 										alt="Product"
-										className="h-[70%] m-auto rounded"
+										className="h-[60%] m-auto rounded"
 									/>
-									<div className="text-sm mt-[-4px] ml-6">
+									<div className="text-sm">
 										<p>{product.productName}</p>
+										<p className="text-ellipsis line-clamp-1">{product.description}</p>
 										<p className="font-semibold">
 											{functionList.displayCurrency(
 												product.sellingPrice
