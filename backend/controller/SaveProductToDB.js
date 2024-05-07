@@ -10,8 +10,9 @@ async function SaveProductToDB(req, response) {
 			quantity,
 			brandName,
 			signature,
+			sellingPrice,
 		} = req.body;
-		if (!productName || !description || !brandName || !price || !images) {
+		if (!productName || !description || !brandName || !price || !images || !category) {
 			return response
 				.status(400)
 				.json({ message: "All fields are required" });
@@ -30,6 +31,7 @@ async function SaveProductToDB(req, response) {
 			category: lowrcaseCategory,
 			quantity,
 			signature,
+			sellingPrice,
 		};
 		const newProduct = new ProductModel(productData);
 		await newProduct.save().then(() => {

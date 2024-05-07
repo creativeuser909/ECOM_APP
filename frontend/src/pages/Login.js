@@ -7,7 +7,7 @@ import { toast } from "react-toastify";
 import { UserDataContext } from "../context/SendData";
 
 const Login = () => {
-	const [userData, setUserData] = useContext(UserDataContext);
+	const {userData, setUserData} = useContext(UserDataContext);
 	const navigateTo = useNavigate();
 	const [showPassword, setShowPassword] = useState(false);
 	const [data, setData] = useState({

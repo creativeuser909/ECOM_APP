@@ -13,6 +13,21 @@ export const SendData = ({ children }) => {
 		profilePic: localStorage.getItem("profilePic") ?? "",
 		role: localStorage.getItem("role") ?? "",
 	});
+	const [productsList, setProductsList] = useState([]);
+	const [productDetail, setProductDetail] = useState({
+		productName: "",
+		brandName: "",
+		category: null,
+		description: "",
+		price: 0,
+		quantity: 0,
+		sellingPrice: 0,
+		productId: "",
+		images: [],
+		removedImages: [],
+		signature: "",
+		userId: "",
+	});
 	const [initialized, setInitialized] = useState(true);
 	const isTokenAvialable = localStorage.getItem("token") ?? "";
 	useEffect(() => {
@@ -88,6 +103,10 @@ export const SendData = ({ children }) => {
 				setAllProducts,
 				allUsers,
 				setAllUsers,
+				productDetail,
+				setProductDetail,
+				productsList,
+				setProductsList,
 			}}
 		>
 			{children}

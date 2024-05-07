@@ -6,27 +6,18 @@ import ImageToBase64 from "../ImageConverter/ImageToBase64";
 import { toast } from "react-toastify";
 import UpdatingAnimation from "./UpdatingAnimation";
 import functionList from "../childComponent/AdminPanel/FunctionList";
-const UpdateProductDetail = ({ onClose, productDetail }) => {
-	const [data, setData] = useState({
-		productName: productDetail.productName,
-		brandName: productDetail.brandName,
-		category: productDetail.category,
-		description: productDetail.description,
-		price: productDetail.price,
-		quantity: productDetail.quantity,
-		sellingPrice: productDetail.sellingPrice,
-		productId: productDetail.productId,
-		images: productDetail.images,
-		removedImages: [],
-		signature: productDetail.signature,
-	});
+import { useContext } from "react";
+import { UserDataContext } from "../context/SendData";
+const UpdateProductDetail = ({ onClose }) => {
+	const { productDetail, setProductDetail, setAllProducts } =
+		useContext(UserDataContext);
 	const [imagePreview, setImagePreview] = useState(false);
 	const [showImage, setShowImage] = useState(null);
 	const [isUpdating, setIsUpdating] = useState(false);
 	const [isUpdated, setIsUpdated] = useState(false);
 
 	useEffect(() => {
-		const price = parseInt(data.price);
+		const price = parseInt(productDetail.price);
 		let sellingPrice;
 		if (price < 500) {
 			sellingPrice = Math.ceil(price + price * 0.3);
@@ -35,8 +26,8 @@ const UpdateProductDetail = ({ onClose, productDetail }) => {
 			sellingPrice =
 				Math.floor(Math.floor(sellingPrice) / 100) * 100 + 99;
 		}
-		setData((prev) => ({ ...prev, sellingPrice }));
-	}, [data.price]);
+		setProductDetail((prev) => ({ ...prev, sellingPrice }));
+	}, [productDetail.price]);
 	const onSelectFile = async (event) => {
 		const files = event.target.files;
 		const images = [];
@@ -48,12 +39,12 @@ const UpdateProductDetail = ({ onClose, productDetail }) => {
 		}
 		event.target.value = null;
 		event.stopPropagation();
-		const newImages = [...data.images, ...images];
-		setData({ ...data, images: newImages });
+		const newImages = [...productDetail.images, ...images];
+		setProductDetail({ ...productDetail, images: newImages });
 	};
 	const handleOnChange = (e) => {
 		const { name, value } = e.target;
-		setData((prevData) => ({
+		setProductDetail((prevData) => ({
 			...prevData,
 			[name]: value,
 		}));
@@ -68,7 +59,7 @@ const UpdateProductDetail = ({ onClose, productDetail }) => {
 					"Content-Type": "application/json",
 					Authorization: `Bearer ${token}`,
 				},
-				body: JSON.stringify(data),
+				body: JSON.stringify(productDetail),
 			});
 			if (!response.ok) {
 				throw new Error("All Fields are required");
@@ -78,7 +69,7 @@ const UpdateProductDetail = ({ onClose, productDetail }) => {
 			console.log(resData);
 			setIsUpdating(false);
 			setIsUpdated(true);
-			setData({
+			setProductDetail({
 				productName: "",
 				brandName: "",
 				category: "",
@@ -95,9 +86,7 @@ const UpdateProductDetail = ({ onClose, productDetail }) => {
 		}
 	};
 
-	useEffect(() => {
-		console.log(data);
-	}, [data]);
+	useEffect(() => {}, [productDetail]);
 
 	return (
 		<div className="fixed inset-0 z-50 flex items-center justify-center bg-gray-700 bg-opacity-50 gap-5">
@@ -111,7 +100,7 @@ const UpdateProductDetail = ({ onClose, productDetail }) => {
 						<input
 							type="text"
 							name="productName"
-							value={data.productName}
+							value={productDetail.productName}
 							required
 							onChange={handleOnChange}
 							className="mb-2 w-full border border-gray-300 rounded-md p-2"
@@ -120,7 +109,7 @@ const UpdateProductDetail = ({ onClose, productDetail }) => {
 						<input
 							type="text"
 							name="brandName"
-							value={data.brandName}
+							value={productDetail.brandName}
 							onChange={handleOnChange}
 							className="mb-2 w-full border border-gray-300 rounded-md p-2"
 						/>
@@ -130,8 +119,8 @@ const UpdateProductDetail = ({ onClose, productDetail }) => {
 							onChange={handleOnChange}
 							className="mb-2 w-full border border-gray-300 rounded-md p-2"
 						>
-							<option value={data.category}>
-								{data.category}
+							<option value={productDetail.category}>
+								{productDetail.category}
 							</option>
 							{ProductCategory.map((category) => (
 								<option
@@ -169,8 +158,8 @@ const UpdateProductDetail = ({ onClose, productDetail }) => {
 							className="mt-4 grid grid-cols-3 gap-4"
 							id="displayImages"
 						>
-							{data.images.length > 0 &&
-								data.images.map((image, index) => (
+							{productDetail.images.length > 0 &&
+								productDetail.images.map((image, index) => (
 									<div
 										key={index}
 										className="w-[120px] h-[120px] bg-slate-600 rounded relative"
@@ -189,21 +178,21 @@ const UpdateProductDetail = ({ onClose, productDetail }) => {
 											onClick={() => {
 												if (image.startsWith("https")) {
 													const removedImages = [
-														...data.removedImages,
+														...productDetail.removedImages,
 														image,
 													];
-													setData({
-														...data,
-														images: data.images.filter(
+													setProductDetail({
+														...productDetail,
+														images: productDetail.images.filter(
 															(img) =>
 																img !== image
 														),
 														removedImages,
 													});
 												} else {
-													setData({
-														...data,
-														images: data.images.filter(
+													setProductDetail({
+														...productDetail,
+														images: productDetail.images.filter(
 															(img) =>
 																img !== image
 														),
@@ -222,7 +211,7 @@ const UpdateProductDetail = ({ onClose, productDetail }) => {
 						<input
 							type="number"
 							name="price"
-							value={data.price}
+							value={productDetail.price}
 							onChange={handleOnChange}
 							className="mb-2 w-full border border-gray-300 rounded-md p-2"
 							required
@@ -231,7 +220,7 @@ const UpdateProductDetail = ({ onClose, productDetail }) => {
 						<input
 							type="number"
 							name="sellingPrice"
-							value={data.sellingPrice}
+							value={productDetail.sellingPrice}
 							onChange={handleOnChange}
 							className="mb-2 w-full border border-gray-300 rounded-md p-2"
 						/>
@@ -240,7 +229,7 @@ const UpdateProductDetail = ({ onClose, productDetail }) => {
 						</div>
 						<textarea
 							name="description"
-							value={data.description}
+							value={productDetail.description}
 							onChange={handleOnChange}
 							className="w-full min-h-[130px] border border-gray-300 rounded-md p-2"
 						></textarea>
@@ -250,9 +239,15 @@ const UpdateProductDetail = ({ onClose, productDetail }) => {
 					<div className="flex justify-center gap-6 items-center mt-4 mb-4 pl-4 pr-4">
 						<button
 							className="bg-blue-600 text-white rounded px-4 py-2"
-							onClick={() => {
-								onClose();
-								functionList.getProductList({});
+							onClick={async () => {
+								const res = async () =>
+									await functionList.getProductList({
+										setAllProducts,
+									});
+								const data = await res();
+								if (data) {
+									onClose();
+								}
 							}}
 						>
 							Done

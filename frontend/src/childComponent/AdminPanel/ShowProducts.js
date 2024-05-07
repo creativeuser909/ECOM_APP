@@ -10,11 +10,10 @@ import { useContext } from "react";
 
 // const ShowProducts = ({ setShowPorduct }) => {
 const ShowProducts = () => {
-	const { allProducts, setAllProducts } = useContext(UserDataContext);
+	const { setProductDetail, allProducts, setAllProducts } =
+		useContext(UserDataContext);
 	const [uploadProductPanel, setUploadProductPanel] = useState(false);
 	const [updateProductPanel, setUpdateProductPanel] = useState(false);
-	// const [allProducts, setAllProducts] = useState(null);
-	const [data, setData] = useState(null);
 	const [deletingProduct, setDeletingProduct] = useState(false);
 	const uploadPorduct = () => {
 		setUploadProductPanel(true);
@@ -22,7 +21,7 @@ const ShowProducts = () => {
 
 	useEffect(() => {
 		functionList.getProductList({ setAllProducts });
-	}, [deletingProduct, allProducts]);
+	}, [deletingProduct]);
 	return (
 		<div className="w-full h-full">
 			<div className="flex w-full bg-emerald-500">
@@ -44,16 +43,22 @@ const ShowProducts = () => {
 								key={product.productId}
 								className="w-[250px] h-[250px] rounded shadow-md relative flex items-center justify-center"
 							>
-								<img
-									src={product.images[0]}
-									alt="Product"
-									className="h-full"
-								/>
+								<div className="w-full h-full p-2 rounded">
+									<img
+										src={product.images[0]}
+										alt="Product"
+										className="h-[70%] m-auto rounded"
+									/>
+									<div className="text-sm mt-[-4px] ml-6">
+										<p>{product.productName}</p>
+										<p className="font-semibold">{functionList.displayCurrency(product.sellingPrice)}</p>
+									</div>
+								</div>
 								<div className="absolute bottom-0 right-0 bg-green-600 rounded-full p-2">
 									<MdModeEdit
 										className="text-2xl text-white cursor-pointer"
 										onClick={() => {
-											setData(product);
+											setProductDetail(product);
 											setUpdateProductPanel(true);
 										}}
 									/>
@@ -76,15 +81,11 @@ const ShowProducts = () => {
 				</div>
 			)}
 			{uploadProductPanel && (
-				<AddProduct
-					onClose={() => setUploadProductPanel(false)}
-					// getProductList={getProductList}
-				/>
+				<AddProduct onClose={() => setUploadProductPanel(false)} />
 			)}
 			{updateProductPanel && (
 				<UpdateProductDetail
 					onClose={() => setUpdateProductPanel(false)}
-					productDetail={data}
 				/>
 			)}
 			{deletingProduct && <DeletingAnimation />}

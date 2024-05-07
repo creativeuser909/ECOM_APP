@@ -8,7 +8,7 @@ cloudinary.config({
 async function UpdateProductDetail(req, res, next) {
 	try {
 		const { removedImages, images, category, _id, signature } = req.body;
-		if (removedImages.length > 0) {
+		if (removedImages) {
 			for (const image of removedImages) {
 				const parts = image.split("/");
 
@@ -40,8 +40,6 @@ async function UpdateProductDetail(req, res, next) {
 
 		const product = await ProductModel.findOneAndUpdate({ signature }, req.body, { new: true });
 		return res.status(201).json({
-			data: req.body,
-			updatedProduct: product,
 			message: "Product updated successfully!",
 			success: true
 		});

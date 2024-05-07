@@ -6,19 +6,10 @@ import ImageToBase64 from "../ImageConverter/ImageToBase64";
 import UploadingAnimation from "./UploadingAnimation";
 import { toast } from "react-toastify";
 import functionList from "../childComponent/AdminPanel/FunctionList";
-const AddProduct = ({ onClose, setAllProducts, setShowPorduct }) => {
-	const [data, setData] = useState({
-		productName: "",
-		brandName: "",
-		category: "",
-		description: "",
-		price: "",
-		quantity: "",
-		sellingPrice: 0,
-		images: [],
-		removedImages: [],
-		signature: "",
-	});
+import { useContext } from "react";
+import { UserDataContext } from "../context/SendData";
+const AddProduct = ({ onClose, setShowPorduct }) => {
+	const {setAllProducts, productDetail, setProductDetail} = useContext(UserDataContext);
 	const [images, setImages] = useState([]);
 	const [imagePreview, setImagePreview] = useState(false);
 	const [selectedImage, setSelectedImage] = useState([]);
@@ -44,8 +35,8 @@ const AddProduct = ({ onClose, setAllProducts, setShowPorduct }) => {
 	};
 	const handleOnChange = (e) => {
 		const { name, value } = e.target;
-		setData((prevData) => ({
-			...prevData,
+		setProductDetail((prevproductDetail) => ({
+			...prevproductDetail,
 			[name]: value
 		}));
 	};
@@ -59,20 +50,20 @@ const AddProduct = ({ onClose, setAllProducts, setShowPorduct }) => {
 					"Content-Type": "application/json",
 					Authorization: `Bearer ${token}`
 				},
-				body: JSON.stringify({ ...data, images })
+				body: JSON.stringify({ ...productDetail, images })
 			});
 			if (!response.ok) {
 				throw new Error("All Fields are required");
 			}
-			const resData = await response.json();
-			toast.success(resData.message);
-			console.log(resData);
+			const resproductDetail = await response.json();
+			toast.success(resproductDetail.message);
+			console.log(resproductDetail);
 			setIsUploading(false);
 			setIsUploaded(true);
-			setData({
+			setProductDetail({
 				productName: "",
 				brandName: "",
-				category: "",
+				category: null,
 				description: "",
 				price: "",
 				quantity: "",
@@ -87,7 +78,7 @@ const AddProduct = ({ onClose, setAllProducts, setShowPorduct }) => {
 	};
 
 	useEffect(() => {
-		const price = parseInt(data.price);
+		const price = parseInt(productDetail.price);
 		let newPrice;
 		if (price < 500) {
 			newPrice = Math.ceil(price + price * 0.3);
@@ -96,9 +87,10 @@ const AddProduct = ({ onClose, setAllProducts, setShowPorduct }) => {
 			newPrice = Math.floor(Math.floor(newPrice) / 100) * 100 + 99;
 		}
 		setSellingPrice(newPrice);
-	}, [data.price]);
+		setProductDetail((prev) => ({ ...prev, sellingPrice: newPrice }));
+	}, [productDetail.price]);
 
-	useEffect(() => {}, [selectedImage, images, data]);
+	useEffect(() => {}, [selectedImage, images, productDetail]);
 
 	return (
 		<div className="fixed inset-0 z-50 flex items-center justify-center bg-gray-700 bg-opacity-50 gap-5">
@@ -112,7 +104,7 @@ const AddProduct = ({ onClose, setAllProducts, setShowPorduct }) => {
 						<input
 							type="text"
 							name="productName"
-							value={data.productName}
+							value={productDetail.productName}
 							required
 							onChange={handleOnChange}
 							className="mb-2 w-full border border-gray-300 rounded-md p-2"
@@ -121,7 +113,7 @@ const AddProduct = ({ onClose, setAllProducts, setShowPorduct }) => {
 						<input
 							type="text"
 							name="brandName"
-							value={data.brandName}
+							value={productDetail.brandName}
 							onChange={handleOnChange}
 							className="mb-2 w-full border border-gray-300 rounded-md p-2"
 						/>
@@ -200,7 +192,7 @@ const AddProduct = ({ onClose, setAllProducts, setShowPorduct }) => {
 						<input
 							type="number"
 							name="price"
-							value={data.price}
+							value={productDetail.price}
 							onChange={handleOnChange}
 							className="mb-2 w-full border border-gray-300 rounded-md p-2"
 							required
@@ -218,7 +210,7 @@ const AddProduct = ({ onClose, setAllProducts, setShowPorduct }) => {
 						</div>
 						<textarea
 							name="description"
-							value={data.description}
+							value={productDetail.description}
 							onChange={handleOnChange}
 							className="w-full min-h-[130px] border border-gray-300 rounded-md p-2"></textarea>
 					</div>
@@ -227,9 +219,12 @@ const AddProduct = ({ onClose, setAllProducts, setShowPorduct }) => {
 					<div className="flex justify-center gap-6 items-center mt-4 mb-4 pl-4 pr-4">
 						<button
 							className="bg-blue-600 text-white rounded px-4 py-2"
-							onClick={() => {
-								onClose();
-								functionList.getProductList({setAllProducts, setShowPorduct});
+							onClick={async () => {
+								const response = async () => functionList.getProductList({setAllProducts});
+								const productDetail = await response();
+								if(productDetail){
+									onClose();
+								}
 							}}>
 							Done
 						</button>
@@ -244,7 +239,7 @@ const AddProduct = ({ onClose, setAllProducts, setShowPorduct }) => {
 							className="absolute top-2 right-0 text-2xl bg-white rounded-full cursor-pointer"
 							onClick={() => {
 								onClose();
-								functionList.getProductList();
+								
 							}}
 						/>
 					</div>

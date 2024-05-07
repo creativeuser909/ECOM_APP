@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { UserDataContext } from "../context/SendData";
 
 const Logout = () => {
-	const [userData, setUserData] = useContext(UserDataContext);
+	const {userData, setUserData} = useContext(UserDataContext);
 	const navigateTo = useNavigate();
 	useEffect(() => {
 		localStorage.clear();

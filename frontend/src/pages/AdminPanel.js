@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect } from "react";
 import { UserDataContext } from "../context/SendData";
 import ShowProducts from "../childComponent/AdminPanel/ShowProducts";
 import ShowUsers from "../childComponent/AdminPanel/ShowUsers";

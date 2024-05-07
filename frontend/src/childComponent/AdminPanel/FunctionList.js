@@ -37,11 +37,20 @@ const getProductList = async ({setAllProducts}) => {
 
 		const data = await response.json();
 		setAllProducts(data);
+		return data;
 	} catch (error) {
 		console.log(error);
 	}
 };
 
-const functionList = { DeleteProduct, getProductList };
+const displayCurrency = (sellingPrice) => {
+	const formatter = new Intl.NumberFormat("en-US", {
+		style: "currency",
+		currency: "INR",
+		minimumFractionDigits: 2,
+	})
+	return formatter.format(sellingPrice);
+}
+const functionList = { DeleteProduct, getProductList, displayCurrency };
 
 export default functionList;
