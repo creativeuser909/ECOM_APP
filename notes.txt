@@ -1,30 +1,17 @@
-	const fetchUserDetails = async () => {
-		try {
-			const token = localStorage.getItem("token");
-			const dataResponse = await fetch("/api/user-details", {
-				method: "POST",
-				credentials: "include",
-				headers: {
-                    "Content-Type": "application/json",
-					Authorization: `Bearer ${token}`
-				},
-                body: JSON.stringify({
-                    token: token,
-                })
-			});
+To make any element center of its parent div understand the given example below.
 
-			if (!dataResponse.ok) {
-				throw new Error("Failed to fetch user details");
-			}
-
-			const dataAPI = await dataResponse.json();
-			console.log(`user-data :  ${JSON.stringify(dataAPI)}`);
-		} catch (error) {
-			console.error("Error fetching user details:", error.message);
-			toast.error("Failed to fetch user details");
-		}
-	};
-
-	useEffect(() => {
-		fetchUserDetails();
-	}, []);
+			<div className="container mx-auto relative">
+				<div className="flex flex-nowrap overflow-x-auto">
+					{images?.map((image, index) => (
+						<div key={index} className="mr-4 flex-shrink-0">
+							<img
+								src={image}
+								alt="banner"
+								className="w-full h-60 object-cover"
+							/>
+						</div>
+					))}
+				</div>
+				<FaCircleArrowLeft className="absolute top-1/2 -translate-y-1/2 left-0 z-10 text-white text-5xl bg-black rounded-full shadow-md" />
+				<FaCircleArrowRight className="absolute top-1/2 -translate-y-1/2 right-0 z-10 text-white text-5xl bg-black rounded-full shadow-md" />
+			</div>

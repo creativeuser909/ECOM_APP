@@ -69,7 +69,7 @@ const resetProductDetail = ({ setProductDetail, productDetail }) => {
 	return productDetail;
 };
 
-const GetProductCategory = async ({setCategoriesList}) => {
+const GetProductCategory = async () => {
 	try {
 		const response = await fetch("/api/get-product-category", {
 			method: "POST",
@@ -79,10 +79,9 @@ const GetProductCategory = async ({setCategoriesList}) => {
 			}
 		});
 		const data = await response.json();
-		console.log(data);
-		setCategoriesList(data);
+		return data
 	} catch (error) {
-		
+		console.log(error)
 	}
 }
 

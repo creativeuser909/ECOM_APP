@@ -6,6 +6,7 @@ import ForgetPassword from "../pages/ForgetPassword";
 import SignUp from "../pages/SignUp";
 import Logout from "../pages/Logout";
 import AdminPanel from "../pages/AdminPanel";
+import CategroyProducts from "../pages/CategroyProducts";
 
 const Routes = createBrowserRouter([
     {
@@ -35,6 +36,10 @@ const Routes = createBrowserRouter([
             {
                 path : "admin",
                 element : <AdminPanel />
+            },
+            {
+                path: "category/:categoryName",
+                element: <CategroyProducts />
             }
 
         ]

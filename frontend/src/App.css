@@ -115,3 +115,23 @@ p, .uploadProduct{
     overflow-x: hidden;
     overflow-y: scroll;
 }
+
+.scroll-x::-webkit-scrollbar{
+    display: none;
+}
+
+
+
+.custom-prev-arrow, .custom-next-arrow {
+    width: 50px;
+    height: 50px;
+    background-color: black;
+    justify-content: center;
+    align-items: center;
+    z-index: 10;
+  }
+  
+  .custom-arrow-icon {
+    color: white;
+    font-size: 30px;
+  }
