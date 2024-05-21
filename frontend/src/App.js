@@ -8,16 +8,14 @@ import "react-toastify/dist/ReactToastify.css";
 import { SendData } from "./context/SendData.js";
 function App() {
 	return (
-		<>
+		<div className="flex flex-col h-screen">
 			<SendData>
 				<ToastContainer />
 				<Header />
-				<main className="mainClass min-h-[calc(100vh-120px)]">
-					<Outlet />
-				</main>
+				<Outlet />
 				<Footer />
 			</SendData>
-		</>
+		</div>
 	);
 }
 

@@ -1,0 +1,22 @@
+* {
+	margin: 0px;
+	padding: 0px;
+}
+.main {
+	position: relative;
+	width: 60%;
+	overflow: hidden;
+	height: fit-content;
+	background-color: aquamarine;
+	display: flex;
+}
+.first,
+.second,
+.third,
+.fourth {
+    margin: 2px;
+	position: relative;
+	min-width: 200px;
+	height: 200px;
+	background-color: chocolate;
+}

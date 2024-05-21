@@ -5,7 +5,11 @@ const CategroyProducts = () => {
     const {categoryName} = useParams();
     console.log(categoryName);
   return (
-    <div>{categoryName}</div>
+    <div className="flex-grow w-full">
+      <div className='h-full w-full bg-red-400'>
+        <h1>{categoryName}</h1>
+      </div>
+    </div>
   )
 }
 

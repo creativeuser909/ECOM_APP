@@ -48,7 +48,7 @@ const Home = () => {
 	}, [categoriesList]);
 
 	return (
-		<div className="w-full">
+		<div className="flex-grow w-full">
 			{/* Categories Section */}
 			<div className="container mx-auto">
 				<div className="flex full justify-start items-center overflow-x-scroll">

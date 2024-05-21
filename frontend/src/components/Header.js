@@ -10,7 +10,7 @@ import { UserDataContext } from "../context/SendData.js";
 import UserMenu from "./UserMenu.js";
 
 const Header = () => {
-	const {userData} = useContext(UserDataContext);
+	const { userData } = useContext(UserDataContext);
 	const [showMenu, setShowMenu] = useState(false);
 	const userIconRef = useRef(null);
 	useEffect(() => {
@@ -33,70 +33,76 @@ const Header = () => {
 		};
 	});
 	return (
-		<header className="h-16 shadow-md bg-white flex justify-between items-center">
-			<section className="w-[20%] items-center ml-4">
-				<div>
-					<Link to={"/"}>
-						<Logo w={90} h={50} />
-					</Link>
+		<div className="w-full">
+			<header className="h-16 shadow-md bg-white flex justify-between items-center">
+				<section className="w-[20%] items-center ml-4">
+					<div>
+						<Link to={"/"}>
+							<Logo w={90} h={50} />
+						</Link>
+					</div>
+				</section>
+				<div className="sm:hidden text-3xl mr-4">
+					<GiHamburgerMenu />
 				</div>
-			</section>
-			<div className="sm:hidden text-3xl mr-4">
-				<GiHamburgerMenu />
-			</div>
-			<section className="hidden sm:flex w-[60%] justify-center items-center">
-				<input
-					type="text"
-					placeholder="Search Product here..."
-					className="w-[60%] outline-none pl-3 border rounded-l-full h-8 focus-within:shadow"
-				/>
-				<div className="text-lg min-w-[50px] h-8 bg-red-600 flex items-center justify-center rounded-r-full text-white">
-					<GrSearch />
-				</div>
-			</section>
+				<section className="hidden sm:flex w-[60%] justify-center items-center">
+					<input
+						type="text"
+						placeholder="Search Product here..."
+						className="w-[60%] outline-none pl-3 border rounded-l-full h-8 focus-within:shadow"
+					/>
+					<div className="text-lg min-w-[50px] h-8 bg-red-600 flex items-center justify-center rounded-r-full text-white">
+						<GrSearch />
+					</div>
+				</section>
 
-			<section className="hidden w-[20%] min-w-[250px] sm:flex justify-between mr-4 h-[100%] items-center">
-				<div
-					ref={userIconRef}
-					className="user_icon h-[100%] items-center justify-center">
-					<div className="text-5xl h-[100%] relative flex justify-center items-center">
-						{userData.token && userData.profilePic ? (
-							<img
-								src={userData.profilePic}
-								alt="Profile"
-								className="h-12 w-12 rounded-full cursor-pointer"
-							/>
-						) : (
-							<FaCircleUser className="cursor-pointer" />
-						)}
-					</div>
-					{showMenu && (
-						<div className="user_icon absolute translate-x-[-38%] translate-y-[-6%]">
-							<UserMenu />
+				<section className="hidden w-[20%] min-w-[250px] sm:flex justify-between mr-4 h-[100%] items-center p-2">
+					<div className="relative min-h-[max-content] max-w-12">
+						<div
+							ref={userIconRef}
+							className="user_icon h-[100%] items-center justify-center">
+							<div className="text-5xl h-[100%] relative flex justify-center items-center">
+								{userData.token && userData.profilePic ? (
+									<img
+										src={userData.profilePic}
+										alt="Profile"
+										className="h-12 w-12 rounded-full cursor-pointer"
+									/>
+								) : (
+									<FaCircleUser className="cursor-pointer" />
+								)}
+							</div>
+							{showMenu && (
+								<div className="user_icon absolute translate-x-[-50%] left-[50%]">
+									<UserMenu />
+								</div>
+							)}
 						</div>
-					)}
-				</div>
-				<div className="text-3xl relative w-[20%] flex justify-center items-center">
-					<span>
-						<IoCart className="text-5xl" />
-					</span>
-					<div className="flex justify-center items-center text-sm absolute top-[-80%] left-[15%] right-0 bottom-0">
-						<p className="text-white bg-red-600 w-5 h-5 rounded-full flex justify-center items-center">
-							0
-						</p>
 					</div>
-				</div>
-				<div className="w-[50%] flex justify-center items-center">
-					<Link to={userData.token ? "/logout" : "/login"}>
-						{userData.token && userData.email ? (
-							<button className="button logout ">Logout</button>
-						) : (
-							<button className="button login ">Login</button>
-						)}
-					</Link>
-				</div>
-			</section>
-		</header>
+					<div className="text-3xl relative w-[20%] flex justify-center items-center">
+						<span>
+							<IoCart className="text-5xl" />
+						</span>
+						<div className="flex justify-center items-center text-sm absolute top-[-80%] left-[15%] right-0 bottom-0">
+							<p className="text-white bg-red-600 w-5 h-5 rounded-full flex justify-center items-center">
+								0
+							</p>
+						</div>
+					</div>
+					<div className="w-[50%] flex justify-center items-center">
+						<Link to={userData.token ? "/logout" : "/login"}>
+							{userData.token && userData.email ? (
+								<button className="button logout ">
+									Logout
+								</button>
+							) : (
+								<button className="button login ">Login</button>
+							)}
+						</Link>
+					</div>
+				</section>
+			</header>
+		</div>
 	);
 };
 
