@@ -7,14 +7,17 @@
 		<title>Document</title>
 	</head>
 	<body>
-		<!-- <div class="outerDiv"> -->
-			<div class="main">
-				<div class="child first">One</div>
-				<div class="child second">Two</div>
-				<div class="child third">Three</div>
-				<div class="child fourth">Four</div>
+		<div class="mainDiv">
+			<div class="arrow left" onclick="slideRight()">
+				<div class="direction"></div>
 			</div>
-		<!-- </div> -->
+			<div class="arrow right" onclick="slideLeft()">
+				<div class="direction"></div>
+			</div>
+			<div class="sliderDiv">
+				<div class="slidesContainer"></div>
+			</div>
+		</div>
 		<script src="index.js"></script>
 	</body>
 </html>

@@ -2,21 +2,84 @@
 	margin: 0px;
 	padding: 0px;
 }
-.main {
+.mainDiv {
+	margin-top: 20px;
 	position: relative;
-	width: 60%;
-	overflow: hidden;
-	height: fit-content;
-	background-color: aquamarine;
-	display: flex;
 }
-.first,
-.second,
-.third,
-.fourth {
-    margin: 2px;
+
+.sliderDiv{
+	border-radius: 10px;
+	box-shadow: 0px 0px 10px rgb(63, 63, 63);
+	margin: auto;
+	background-color: red;
+	width: 80%;
+	height: 300px;
+	border: none;
+	overflow: hidden;
+	overflow-x: scroll;
+}
+
+.arrow{
+	width: 50px;
+	height: 50px;
+	position: absolute;
+	top: 50%;
+	transform: translateY(-50%);
+	background-color: blue;
+	border-radius: 50%;
+	cursor: pointer;
+}
+.arrow.right{
+	right: 0px;
+	margin-right: 20px;
+}
+.arrow.left{
+	margin-left: 20px;
+}
+
+.direction{
 	position: relative;
-	min-width: 200px;
-	height: 200px;
-	background-color: chocolate;
+	width: 20px;
+	height: 20px;
+	border-top: 4px solid black;
+	border-right: 4px solid black;
+}
+
+.arrow.left .direction{
+	position: absolute;
+	top: 25%;
+	left: 30%;
+	transform: rotate(-135deg);
+}
+.arrow.right .direction{
+	position: absolute;
+	top: 25%;
+	right: 30%;
+	transform: rotate(45deg);
+}
+
+.slidesContainer{
+	position: relative;
+	top: 50%;
+	transform: translateY(-50%);
+	gap: 5px;
+	padding: 10px;
+	display: flex;
+	border-radius: 10px;
+	min-width: max-content;
+	min-height: max-content;
+
+}
+
+.slides{
+	position: relative;
+	width: 500px;
+	height: 250px;
+	background-color: rgb(255, 165, 0);
+	float: left;
+}
+
+
+::-webkit-scrollbar{
+	display: none;
 }
