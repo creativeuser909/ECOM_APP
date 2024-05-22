@@ -1,0 +1,452 @@
+[{
+  "_id": {
+    "$oid": "663a094d089a0045fba977e6"
+  },
+  "userId": "66334bdfeba50c808fd8ccf6",
+  "productName": "eardopes",
+  "description": "Brand New airdope of Boat.",
+  "price": 1000,
+  "sellingPrice": 1399,
+  "images": [
+    "https://res.cloudinary.com/dcvg9vrez/image/upload/v1715079496/airpodes/jhevg7sleg12ywndv8sj.webp",
+    "https://res.cloudinary.com/dcvg9vrez/image/upload/v1715079497/airpodes/ka3lh7bdgph8ljyjcyny.webp",
+    "https://res.cloudinary.com/dcvg9vrez/image/upload/v1715079499/airpodes/dqlopdybajvzsqhx40ed.webp",
+    "https://res.cloudinary.com/dcvg9vrez/image/upload/v1715079500/airpodes/apdve4lfnnxcudutzvp1.webp"
+  ],
+  "signature": "5bc6698d548d8be51c72406f41224ca938121164",
+  "brandName": "boat",
+  "category": "airpodes",
+  "quantity": 0,
+  "createdAt": {
+    "$date": "2024-05-07T10:58:21.198Z"
+  },
+  "updatedAt": {
+    "$date": "2024-05-07T10:58:21.198Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "663a0a20089a0045fba977ef"
+  },
+  "userId": "66334bdfeba50c808fd8ccf6",
+  "productName": "earbuds 115",
+  "description": "BOAT eardopes 115",
+  "price": 1200,
+  "sellingPrice": 1599,
+  "images": [
+    "https://res.cloudinary.com/dcvg9vrez/image/upload/v1715079709/airpodes/n4cvl9ronyzmc5thxou0.webp",
+    "https://res.cloudinary.com/dcvg9vrez/image/upload/v1715079711/airpodes/e8zkldapzoizdaaddngt.webp"
+  ],
+  "signature": "c0f64ad94eddaa7d676fca3890a159299d022762",
+  "brandName": "boat",
+  "category": "airpodes",
+  "quantity": null,
+  "createdAt": {
+    "$date": "2024-05-07T11:01:52.074Z"
+  },
+  "updatedAt": {
+    "$date": "2024-05-07T11:01:52.074Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "663a0ab2089a0045fba977f4"
+  },
+  "userId": "66334bdfeba50c808fd8ccf6",
+  "productName": "earbuds 121 v2",
+  "description": "Earbuds 121 V2.",
+  "price": 1300,
+  "sellingPrice": 1699,
+  "images": [
+    "https://res.cloudinary.com/dcvg9vrez/image/upload/v1715079857/airpodes/vw9aul3gzvzqzitkcxbg.webp"
+  ],
+  "signature": "7d3ef21c721ae453c37ebe1f7b64a27d9489fbb8",
+  "brandName": "boat",
+  "category": "airpodes",
+  "quantity": 0,
+  "createdAt": {
+    "$date": "2024-05-07T11:04:18.493Z"
+  },
+  "updatedAt": {
+    "$date": "2024-05-07T11:04:18.493Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "663a0b6d089a0045fba977f6"
+  },
+  "userId": "66334bdfeba50c808fd8ccf6",
+  "productName": "eardopes 121",
+  "description": "BOAT eardopes 121",
+  "price": 1100,
+  "sellingPrice": 1499,
+  "images": [
+    "https://res.cloudinary.com/dcvg9vrez/image/upload/v1715080039/airpodes/w06d7py07olhati8ompd.webp",
+    "https://res.cloudinary.com/dcvg9vrez/image/upload/v1715080041/airpodes/afy179jng8mgnkslx6ox.webp"
+  ],
+  "signature": "637a374c739d14b22295374defedbcd540200c05",
+  "brandName": "boat",
+  "category": "airpodes",
+  "quantity": null,
+  "createdAt": {
+    "$date": "2024-05-07T11:07:25.226Z"
+  },
+  "updatedAt": {
+    "$date": "2024-05-07T11:07:25.226Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "663a0d29089a0045fba977fe"
+  },
+  "userId": "66334bdfeba50c808fd8ccf6",
+  "productName": "eardopes 381",
+  "description": "Earbuds 381",
+  "price": 899,
+  "sellingPrice": 1199,
+  "images": [
+    "https://res.cloudinary.com/dcvg9vrez/image/upload/v1715080472/airpodes/m2u2pg9ifew4ajqn1ptp.webp",
+    "https://res.cloudinary.com/dcvg9vrez/image/upload/v1715080475/airpodes/zniu3ldueqnefhirl5qh.webp",
+    "https://res.cloudinary.com/dcvg9vrez/image/upload/v1715080480/airpodes/nz5bmqj6zyyz60eu6t4p.webp",
+    "https://res.cloudinary.com/dcvg9vrez/image/upload/v1715080487/airpodes/yetrzw3kmgyelfih9aaj.webp"
+  ],
+  "signature": "251e7c822578f160abfdbe39054537d55eb21449",
+  "brandName": "boat",
+  "category": "airpodes",
+  "quantity": 0,
+  "createdAt": {
+    "$date": "2024-05-07T11:14:49.589Z"
+  },
+  "updatedAt": {
+    "$date": "2024-05-07T11:14:49.589Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "663a0f4e089a0045fba9780e"
+  },
+  "userId": "66334bdfeba50c808fd8ccf6",
+  "productName": "osaka os 550 tripod",
+  "description": "Osaka OS 550 Tripod 55 Inches (140 cm) with Mobile Holder and Carry Case for Smartphone & DSLR Camera Portable Lightweight Aluminium Tripod 4",
+  "price": 5499,
+  "sellingPrice": 7199,
+  "images": [
+    "https://res.cloudinary.com/dcvg9vrez/image/upload/v1715081034/cameras/amwtkwgvgttclm3dmuqc.jpg",
+    "https://res.cloudinary.com/dcvg9vrez/image/upload/v1715081035/cameras/wwyq2qjhhjpo36lcq2vm.jpg",
+    "https://res.cloudinary.com/dcvg9vrez/image/upload/v1715081037/cameras/ejvueax6a6gjbhujtlnd.jpg",
+    "https://res.cloudinary.com/dcvg9vrez/image/upload/v1715081038/cameras/areqaabr70dzmr9rqonl.jpg"
+  ],
+  "signature": "352b37e56672afdbb0efd3573d8228ee31348438",
+  "brandName": "osaka os",
+  "category": "cameras",
+  "quantity": 0,
+  "createdAt": {
+    "$date": "2024-05-07T11:23:58.924Z"
+  },
+  "updatedAt": {
+    "$date": "2024-05-07T11:23:58.924Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "663a110e089a0045fba97813"
+  },
+  "userId": "66334bdfeba50c808fd8ccf6",
+  "productName": "boat rockerz 450",
+  "description": "boAt Rockerz 450 Batman DC Edition 1",
+  "price": 1500,
+  "sellingPrice": 1999,
+  "images": [
+    "https://res.cloudinary.com/dcvg9vrez/image/upload/v1715081481/earphones/mjf5yohqol8jhsbyxodl.webp",
+    "https://res.cloudinary.com/dcvg9vrez/image/upload/v1715081483/earphones/gknhmxesfkkibm5kwpcg.webp",
+    "https://res.cloudinary.com/dcvg9vrez/image/upload/v1715081484/earphones/krgspynuxgajndzvt88w.webp",
+    "https://res.cloudinary.com/dcvg9vrez/image/upload/v1715081485/earphones/bpwtyr9undz0mxj7s4om.webp"
+  ],
+  "signature": "337fb67758b10893199b59e010a25ee9a6f37cf5",
+  "brandName": "boat",
+  "category": "earphones",
+  "quantity": 0,
+  "createdAt": {
+    "$date": "2024-05-07T11:31:26.460Z"
+  },
+  "updatedAt": {
+    "$date": "2024-05-07T11:31:26.460Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "663a1298089a0045fba97817"
+  },
+  "userId": "66334bdfeba50c808fd8ccf6",
+  "productName": "boat trebel rockerz 450",
+  "description": "boAt TRebel Rockerz 450",
+  "price": 1500,
+  "sellingPrice": 1999,
+  "images": [
+    "https://res.cloudinary.com/dcvg9vrez/image/upload/v1715081876/earphones/nodcqb8ndy4ydmopt387.webp",
+    "https://res.cloudinary.com/dcvg9vrez/image/upload/v1715081877/earphones/rbnwgzmztrwpvcd8jeha.webp",
+    "https://res.cloudinary.com/dcvg9vrez/image/upload/v1715081878/earphones/o9mhbntbdfexldut7vvy.webp",
+    "https://res.cloudinary.com/dcvg9vrez/image/upload/v1715081879/earphones/kz9wg0iatfqnkcrin0rr.webp"
+  ],
+  "signature": "f249f8d359494cee6c264e3721760aa26d9d4e7c",
+  "brandName": "boat",
+  "category": "earphones",
+  "quantity": 0,
+  "createdAt": {
+    "$date": "2024-05-07T11:38:00.257Z"
+  },
+  "updatedAt": {
+    "$date": "2024-05-07T11:38:00.257Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "663a143c089a0045fba97822"
+  },
+  "userId": "66334bdfeba50c808fd8ccf6",
+  "productName": "boat rockerz 400",
+  "description": "boAt Rockerz 400",
+  "price": 1299,
+  "sellingPrice": 1699,
+  "images": [
+    "https://res.cloudinary.com/dcvg9vrez/image/upload/v1715082296/earphones/sb1uk7evbljaijdifmon.webp",
+    "https://res.cloudinary.com/dcvg9vrez/image/upload/v1715082297/earphones/l7w2l3b8alvaq9g7mscu.webp",
+    "https://res.cloudinary.com/dcvg9vrez/image/upload/v1715082298/earphones/sabgcetsnbgohp8ne8ga.webp",
+    "https://res.cloudinary.com/dcvg9vrez/image/upload/v1715082299/earphones/gscwmhlkm6jv8ehiudmj.webp"
+  ],
+  "signature": "df28a7585c06a83127f22f78fade4111cdf0197f",
+  "brandName": "boat",
+  "category": "earphones",
+  "quantity": 0,
+  "createdAt": {
+    "$date": "2024-05-07T11:45:00.389Z"
+  },
+  "updatedAt": {
+    "$date": "2024-05-07T11:45:00.389Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "663a1f28089a0045fba978a8"
+  },
+  "userId": "66334bdfeba50c808fd8ccf6",
+  "productName": "boat rockerz 258 pro+",
+  "description": "boAt Rockerz 258 Pro+",
+  "price": 1100,
+  "sellingPrice": 1499,
+  "images": [
+    "https://res.cloudinary.com/dcvg9vrez/image/upload/v1715085092/earphones/h2oq7sckme09jrjflxjm.webp",
+    "https://res.cloudinary.com/dcvg9vrez/image/upload/v1715085093/earphones/t3pflci0ucz6avwdccie.webp",
+    "https://res.cloudinary.com/dcvg9vrez/image/upload/v1715085094/earphones/bkdpgoixa7swtzcer0du.webp",
+    "https://res.cloudinary.com/dcvg9vrez/image/upload/v1715085095/earphones/eo8n3b8clhca8sl6jsde.webp"
+  ],
+  "signature": "9424cf83069bc86967100a1462d922a8269807c8",
+  "brandName": "boat",
+  "category": "earphones",
+  "quantity": 0,
+  "createdAt": {
+    "$date": "2024-05-07T12:31:36.364Z"
+  },
+  "updatedAt": {
+    "$date": "2024-05-07T12:31:36.364Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "663a868a4b6f54a08234d6c9"
+  },
+  "userId": "66334bdfeba50c808fd8ccf6",
+  "productName": "samsung galaxy a14 5g",
+  "description": "SAMSUNG Galaxy A14 5G (Dark Red, 64 GB) (4 GB RAM)",
+  "price": 16000,
+  "sellingPrice": 20899,
+  "images": [
+    "https://res.cloudinary.com/dcvg9vrez/image/upload/v1715111557/mobiles/bcplw1kjwg1einfaq27t.webp",
+    "https://res.cloudinary.com/dcvg9vrez/image/upload/v1715111558/mobiles/tqhjliohvw5bcemoyb6a.webp",
+    "https://res.cloudinary.com/dcvg9vrez/image/upload/v1715111559/mobiles/irv4dyle379sd3r9wiul.webp",
+    "https://res.cloudinary.com/dcvg9vrez/image/upload/v1715111560/mobiles/szul1l17qavbqiw7ayh0.webp"
+  ],
+  "signature": "048c2f208b03832a5e88cfebe3cf6d1d0601f140",
+  "brandName": "samsung",
+  "category": "mobiles",
+  "quantity": 0,
+  "createdAt": {
+    "$date": "2024-05-07T19:52:42.422Z"
+  },
+  "updatedAt": {
+    "$date": "2024-05-07T19:52:42.422Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "663a86ee4b6f54a08234d6cb"
+  },
+  "userId": "66334bdfeba50c808fd8ccf6",
+  "productName": "wireless optical mouse",
+  "description": "Portronics Toad One Wireless Optical Mouse (2.4GHz Wireless, Bluetooth, Black)",
+  "price": 400,
+  "sellingPrice": 520,
+  "images": [
+    "https://res.cloudinary.com/dcvg9vrez/image/upload/v1715111655/mouse/txkr2uulshfuesuydiw6.webp",
+    "https://res.cloudinary.com/dcvg9vrez/image/upload/v1715111657/mouse/mopjsphz3d518zjxh2uf.webp",
+    "https://res.cloudinary.com/dcvg9vrez/image/upload/v1715111658/mouse/tloncyo0ypxnoqczopcr.webp",
+    "https://res.cloudinary.com/dcvg9vrez/image/upload/v1715111660/mouse/kvde7qxbj9lpnezfqgsa.webp"
+  ],
+  "signature": "808e5fc8471f85aa2395b6b91bf67917fbaf9419",
+  "brandName": "portronics toad one",
+  "category": "mouse",
+  "quantity": null,
+  "createdAt": {
+    "$date": "2024-05-07T19:54:22.473Z"
+  },
+  "updatedAt": {
+    "$date": "2024-05-07T19:54:22.473Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "663a87644b6f54a08234d6d3"
+  },
+  "userId": "66334bdfeba50c808fd8ccf6",
+  "productName": "canon printer",
+  "description": "Canon MG2570S Multi-function Color Inkjet Printer",
+  "price": 2000,
+  "sellingPrice": 2699,
+  "images": [
+    "https://res.cloudinary.com/dcvg9vrez/image/upload/v1715111775/printer/cw99xrvtztrcziuudykc.webp",
+    "https://res.cloudinary.com/dcvg9vrez/image/upload/v1715111776/printer/ntwsiep8smy3uvjyc3jm.webp",
+    "https://res.cloudinary.com/dcvg9vrez/image/upload/v1715111777/printer/peidxa71uwvaoltcxqdk.webp",
+    "https://res.cloudinary.com/dcvg9vrez/image/upload/v1715111778/printer/egij1arnw4wn2hndrakw.webp"
+  ],
+  "signature": "7757298b345e699111d154eac7596655db364810",
+  "brandName": "canon",
+  "category": "printer",
+  "quantity": 0,
+  "createdAt": {
+    "$date": "2024-05-07T19:56:20.194Z"
+  },
+  "updatedAt": {
+    "$date": "2024-05-08T14:57:01.684Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "663a88194b6f54a08234d6e7"
+  },
+  "userId": "66334bdfeba50c808fd8ccf6",
+  "productName": "amd ryzen 7",
+  "description": "amd Ryzen 7 3800XT 3.9 GHz Upto 4.7 GHz AM4 Socket 8 Cores 16 Threads Desktop Processor (Silver)",
+  "price": 16000,
+  "sellingPrice": 20899,
+  "images": [
+    "https://res.cloudinary.com/dcvg9vrez/image/upload/v1715111956/processor/qykggcogxnm61zejuypc.webp",
+    "https://res.cloudinary.com/dcvg9vrez/image/upload/v1715111957/processor/avihggavvugjb5zymi0b.webp",
+    "https://res.cloudinary.com/dcvg9vrez/image/upload/v1715111958/processor/lwcgnsh6jx6cpw0nuwcu.webp",
+    "https://res.cloudinary.com/dcvg9vrez/image/upload/v1715111959/processor/fitdpkhxpn2n2h3bdhc4.webp"
+  ],
+  "signature": "a20c58a0426e9458b80de84db7ccb8705fbe7a50",
+  "brandName": "amd ryzen",
+  "category": "processor",
+  "quantity": 0,
+  "createdAt": {
+    "$date": "2024-05-07T19:59:21.596Z"
+  },
+  "updatedAt": {
+    "$date": "2024-05-07T19:59:21.596Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "663a887f4b6f54a08234d6e9"
+  },
+  "userId": "66334bdfeba50c808fd8ccf6",
+  "productName": "haier 258 l",
+  "description": "Haier 258 L Frost Free Double Door 3 Star Convertible Refrigerator (Xcel Glass, HRF-2784PXG-E)",
+  "price": 5000,
+  "sellingPrice": 6599,
+  "images": [
+    "https://res.cloudinary.com/dcvg9vrez/image/upload/v1715112056/refrigerator/bvzidndlohdyf5kohvr3.webp",
+    "https://res.cloudinary.com/dcvg9vrez/image/upload/v1715112057/refrigerator/sqawp3zesaajtqhpcxip.webp",
+    "https://res.cloudinary.com/dcvg9vrez/image/upload/v1715112058/refrigerator/vjxjdgypbsu823th11cs.webp",
+    "https://res.cloudinary.com/dcvg9vrez/image/upload/v1715112060/refrigerator/qvlsq5ialsnougpvvbpa.webp"
+  ],
+  "signature": "94761fb537835de2fe2517a5834519d3d030e08a",
+  "brandName": "haier",
+  "category": "refrigerator",
+  "quantity": null,
+  "createdAt": {
+    "$date": "2024-05-07T20:01:03.267Z"
+  },
+  "updatedAt": {
+    "$date": "2024-05-07T20:01:03.267Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "663a88cd4b6f54a08234d6eb"
+  },
+  "userId": "66334bdfeba50c808fd8ccf6",
+  "productName": "boat stone 620",
+  "description": "boAt Stone 620",
+  "price": 1500,
+  "sellingPrice": 1999,
+  "images": [
+    "https://res.cloudinary.com/dcvg9vrez/image/upload/v1715112135/speaker/hva7m43utubtg4c6jwiq.webp",
+    "https://res.cloudinary.com/dcvg9vrez/image/upload/v1715112136/speaker/yorfyzx2mtyeinkyjprc.webp",
+    "https://res.cloudinary.com/dcvg9vrez/image/upload/v1715112138/speaker/t8qolixk0usco5sjct7z.webp",
+    "https://res.cloudinary.com/dcvg9vrez/image/upload/v1715112139/speaker/zrjwgy5zylfbkam5omue.webp"
+  ],
+  "signature": "529c19015ca1f2723612c16120b9f05985b57f6f",
+  "brandName": "boat",
+  "category": "speaker",
+  "quantity": null,
+  "createdAt": {
+    "$date": "2024-05-07T20:02:21.385Z"
+  },
+  "updatedAt": {
+    "$date": "2024-05-07T20:02:21.385Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "663a89324b6f54a08234d6f0"
+  },
+  "userId": "66334bdfeba50c808fd8ccf6",
+  "productName": "agk-11 trimmer",
+  "description": "Ambrane AGK-11 Trimmer 60 min Runtime 18 Length Settings (Black)",
+  "price": 600,
+  "sellingPrice": 799,
+  "images": [
+    "https://res.cloudinary.com/dcvg9vrez/image/upload/v1715112236/trimmer/cfe4ief8jhlx3bnfoovn.webp",
+    "https://res.cloudinary.com/dcvg9vrez/image/upload/v1715112237/trimmer/mza0j98vabq6coubu04p.webp",
+    "https://res.cloudinary.com/dcvg9vrez/image/upload/v1715112239/trimmer/d5nveuvk8fxmxaunlwsb.webp",
+    "https://res.cloudinary.com/dcvg9vrez/image/upload/v1715112240/trimmer/isnbwpo3qwrtjp7lliag.webp"
+  ],
+  "signature": "747bafb1f5ca2a63148f25da9b5fc0081eefd0d0",
+  "brandName": "ambrane agk",
+  "category": "trimmer",
+  "quantity": null,
+  "createdAt": {
+    "$date": "2024-05-07T20:04:02.699Z"
+  },
+  "updatedAt": {
+    "$date": "2024-05-07T20:04:02.699Z"
+  },
+  "__v": 0
+}]
