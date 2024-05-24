@@ -2,12 +2,15 @@
 	margin: 0px;
 	padding: 0px;
 }
+
 .mainDiv {
 	margin-top: 20px;
 	position: relative;
 }
 
-.sliderDiv{
+.sliderDiv {
+	gap: 10px;
+	display: flex;
 	position: relative;
 	border-radius: 10px;
 	box-shadow: 0px 0px 10px rgb(63, 63, 63);
@@ -20,7 +23,7 @@
 	overflow: hidden;
 }
 
-.arrow{
+.arrow {
 	width: 50px;
 	height: 50px;
 	position: absolute;
@@ -30,15 +33,17 @@
 	border-radius: 50%;
 	cursor: pointer;
 }
-.arrow.right{
+
+.arrow.right {
 	right: 0px;
 	margin-right: 20px;
 }
-.arrow.left{
+
+.arrow.left {
 	margin-left: 20px;
 }
 
-.direction{
+.direction {
 	position: relative;
 	width: 20px;
 	height: 20px;
@@ -46,47 +51,65 @@
 	border-right: 4px solid black;
 }
 
-.arrow.left .direction{
+.arrow.left .direction {
 	position: absolute;
 	top: 25%;
 	left: 30%;
 	transform: rotate(-135deg);
 }
-.arrow.right .direction{
+
+.arrow.right .direction {
 	position: absolute;
 	top: 25%;
 	right: 30%;
 	transform: rotate(45deg);
 }
-.sliderBox{
-	display: flex;
-	min-width: max-content;
-	min-height: max-content;
+
+
+.slide {
+	position: relative;
+	float: left;
 	top: 50%;
 	transform: translateY(-50%);
-	position: absolute;
-}
-.slidesContainer{
-	margin-right: -2px;
-	position: relative;
-	gap: 5px;
-	padding: 10px;
-	display: flex;
-	border-radius: 10px;
-	min-width: max-content;
-	min-height: max-content;
-	float: left;
-}
-
-.slides{
-	position: relative;
-	width: 500px;
+	min-width: 80%;
 	height: 250px;
-	background-color: rgb(255, 165, 0);
-	float: left;
+	/* background-color: rgb(255, 165, 0); */
+	overflow: hidden;
 }
 
 
-::-webkit-scrollbar{
+::-webkit-scrollbar {
 	display: none;
+}
+
+@keyframes grow {
+	from {
+		min-width: 0px;
+	}
+	to {
+		min-width: var(--initailWidth);
+		/* margin-right: -10px; */
+	}
+}
+@keyframes shrink {
+	from{
+		width: var(--initailWidth);
+	}
+	to{
+		min-width: 0px;
+		margin-left: -10px;
+	}
+}
+.grow-slide{
+	position: relative;
+	float: left;
+	top: 50%;
+	transform: translateY(-50%);
+	height: var(--initialHeight);
+	/* background-color: rgb(255, 165, 0); */
+	animation: grow 0.5s forwards;
+	/* margin-left: 10px; */
+}
+.shrink-slide{
+	animation: shrink 0.5s forwards;
 }
