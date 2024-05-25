@@ -1,4 +1,5 @@
 let width;
+let animating = false;
 function returnDiv() {
 	return new Promise((resolve) => {
 		for (let i = 1; i <= 3; i++) {
@@ -26,7 +27,11 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 const slideLeft = async () => {
-	const handleClick = disableMouseClick();
+	if (animating) {
+		console.log("animating");
+		return;
+	}
+	animating = true;
 	const newDiv = document
 		.querySelector(`.slidesContainer .slide`)
 		.cloneNode(true);
@@ -43,13 +48,16 @@ const slideLeft = async () => {
 	}).then(() => {
 		document.querySelector(`.slidesContainer`).firstChild.remove();
 	});
-	enableMouseClick(handleClick);
+	animating = false;
 };
 
 const slideRight = async () => {
-	
-	const handleClick = disableMouseClick();
-	
+	if (animating) {
+		console.log("animating");
+		return;
+	}
+	animating = true;
+
 	const slides = document.querySelectorAll(`.slidesContainer .slide`);
 	const newDiv = document
 		.querySelectorAll(`.slidesContainer .slide`)
@@ -60,7 +68,7 @@ const slideRight = async () => {
 		.insertBefore(
 			newDiv,
 			document.querySelector(`.slidesContainer`).firstChild
-	);
+		);
 	await new Promise((resolve) => {
 		newDiv.addEventListener("animationend", resolve, { once: true });
 	}).then(() => {
@@ -69,18 +77,8 @@ const slideRight = async () => {
 			.firstChild.classList.remove("grow-slide");
 		document.querySelector(`.slidesContainer`).lastChild.remove();
 	});
-	enableMouseClick(handleClick);
+	animating = false;
 };
 
 
-const disableMouseClick = () => {
-	const handleClick = (event) => {
-		event.stopPropagation();
-		event.preventDefault();
-	};
-	document.addEventListener("click", handleClick, true);
-	return handleClick;
-};
-const enableMouseClick = (handleClick) => {
-	document.removeEventListener("click", handleClick, true);
-};
+const intervaID = setInterval(slideLeft, 1500); 
